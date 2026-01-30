@@ -37,7 +37,7 @@ TL++ is a distributed deep learning framework that enables collaborative model t
 
 ### How It Works
 
-![Architecture Diagram](./figure/architecture.svg)
+![Architecture Diagram](./figure/architecture.png)
 
 ### Architecture Components
 
