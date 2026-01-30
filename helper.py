@@ -1,4 +1,4 @@
-"""Helper node for TL++ secure mode."""
+"""Helper server for TL++ secure mode."""
 
 import argparse
 import socket
@@ -57,7 +57,7 @@ def setup_logging():
 
 
 # ==============================================================================
-# HELPER NODE HANDLER
+# HELPER SERVER HANDLER
 # ==============================================================================
 
 
@@ -68,7 +68,7 @@ class HelperNodeHandler(SecureSocketCommunicator):
     """
     
     def __init__(self, sock: socket.socket, address: tuple, node_id: int):
-        """Initialize helper node handler.
+        """Initialize helper server handler.
         
         Args:
             sock: Connected socket
@@ -118,7 +118,7 @@ class HelperNodeHandler(SecureSocketCommunicator):
 
 
 # ==============================================================================
-# MAIN HELPER NODE CLASS
+# MAIN HELPER SERVER CLASS
 # ==============================================================================
 
 
@@ -139,7 +139,7 @@ class HelperNode:
     """
     
     def __init__(self, config: dict):
-        """Initialize helper node.
+        """Initialize helper server.
         
         Args:
             config: Configuration dictionary
@@ -167,7 +167,7 @@ class HelperNode:
         self.outputs_share_1 = None
         self.batch_count = 0
         
-        logging.info(f"Helper node initialized")
+        logging.info(f"Helper server initialized")
         logging.info(f"  Node server:    {self.node_host}:{self.node_port}")
         logging.info(f"  Orchestrator:   {self.orch_host}:{self.orch_port}")
         logging.info(f"  Device:         {self.device}")
@@ -245,7 +245,7 @@ class HelperNode:
         Continuously processes batches until training completes.
         """
         logging.info("=" * 80)
-        logging.info("Helper node ready for secure MPC")
+        logging.info("Helper server ready for secure MPC")
         logging.info("=" * 80)
         logging.info("")
         
@@ -514,7 +514,7 @@ class HelperNode:
 def parse_args():
     """Parse command-line arguments."""
     parser = argparse.ArgumentParser(
-        description="Helper Node for TL++ Secure Mode",
+        description="Helper Server for TL++ Secure Mode",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
     
@@ -534,14 +534,14 @@ def parse_args():
 
 
 def main():
-    """Main entry point for helper node."""
+    """Main entry point for helper server."""
     config = parse_args()
     
     # Setup logging
     setup_logging()
     
     logging.info("=" * 80)
-    logging.info("TL++ Helper Node (Secure Mode)")
+    logging.info("TL++ Helper Server (Secure Mode)")
     logging.info("=" * 80)
     logging.info("")
 
