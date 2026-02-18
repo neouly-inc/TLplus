@@ -262,7 +262,7 @@ To run the centralized baseline:
 ```bash
 python centralized.py \
   --num_classes 10 \
-  --epochs 1000 \
+  --epochs 200 \
   --lr 0.1 \
   --scheduler cosine
 ```
