@@ -59,6 +59,17 @@ TL++ is a distributed deep learning framework that enables collaborative model t
 - Enables privacy-preserving computation without reconstruction
 - Critical for maintaining privacy guarantees
 
+## 🧠 CNN Model
+
+TL++ uses a custom VGG-style CNN defined in `models.py`, designed for CIFAR-10 (32×32 RGB images). The full architecture consists of three convolutional blocks followed by fully connected classification layers:
+
+- **Block 1:** Two Conv2D layers (3→64→64 channels, 3×3 kernels, padding=1), each followed by ReLU, then 2×2 MaxPool — output: 64×16×16
+- **Block 2:** Two Conv2D layers (64→128→128 channels), each followed by ReLU, then 2×2 MaxPool — output: 128×8×8
+- **Block 3:** Two Conv2D layers (128→256→256 channels), each followed by ReLU, then 2×2 MaxPool — output: 256×4×4
+- **Classifier:** Flatten → FC(4096→512) → ReLU → Dropout(0.5) → FC(512→num_classes)
+
+All weights are initialized with Xavier uniform initialization for stable gradient flow. In the distributed setting, the model is split at a configurable **cut layer** — the node runs the bottom portion and sends intermediate activations to the orchestrator, which processes the remaining layers. This split is implemented via two classes: `CNNNode` (edge-side) and `CNNOrchestrator` (server-side), which share the same underlying architecture.
+
 ## 🚀 Installation
 
 ### Prerequisites
@@ -238,6 +249,22 @@ python node.py \
   --orch_port 8080 \
   --helper_host HELPER_IP \
   --helper_port 8081
+```
+
+## 📊 Centralized Learning Baseline
+
+`centralized.py` provides a standard centralized training baseline for fair performance comparison against TL++. It trains the identical CNN architecture on the complete CIFAR-10 dataset using a single machine with full data access — no distribution, no split learning, and no MPC overhead.
+
+The baseline uses the same hyperparameters as TL++ by default (SGD with momentum, cosine annealing scheduler, gradient clipping, early stopping) and applies the same data augmentation pipeline (random crop, random horizontal flip, normalization). This ensures that any accuracy gap between centralized and distributed results reflects the cost of privacy and distribution rather than differences in training setup.
+
+To run the centralized baseline:
+
+```bash
+python centralized.py \
+  --num_classes 10 \
+  --epochs 1000 \
+  --lr 0.1 \
+  --scheduler cosine
 ```
 
 ## ⚙️ Configuration
