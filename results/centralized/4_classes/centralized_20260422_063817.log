@@ -1,0 +1,772 @@
+2026-04-22 06:38:17 KST | INFO | ================================================================================
+2026-04-22 06:38:17 KST | INFO | TL++ Centralized Baseline
+2026-04-22 06:38:17 KST | INFO | ================================================================================
+2026-04-22 06:38:17 KST | INFO | Log file: logs/centralized_20260422_063817.log
+2026-04-22 06:38:17 KST | INFO | 
+2026-04-22 06:38:17 KST | INFO | Device: cuda
+2026-04-22 06:38:17 KST | INFO | 
+2026-04-22 06:38:17 KST | INFO | --------------------------------------------------------------------------------
+2026-04-22 06:38:17 KST | INFO | CONFIGURATION
+2026-04-22 06:38:17 KST | INFO | --------------------------------------------------------------------------------
+2026-04-22 06:38:17 KST | INFO | Classes:          4
+2026-04-22 06:38:17 KST | INFO | Batch size:       128
+2026-04-22 06:38:17 KST | INFO | Learning rate:    0.1
+2026-04-22 06:38:17 KST | INFO | Scheduler:        cosine
+2026-04-22 06:38:17 KST | INFO | 
+2026-04-22 06:38:17 KST | INFO | --------------------------------------------------------------------------------
+2026-04-22 06:38:17 KST | INFO | DATA LOADING
+2026-04-22 06:38:17 KST | INFO | --------------------------------------------------------------------------------
+2026-04-22 06:38:19 KST | INFO | Filtering to 4 classes (0-3)
+2026-04-22 06:38:47 KST | INFO | Training samples:   20,000
+2026-04-22 06:38:47 KST | INFO | Test samples:       4,000
+2026-04-22 06:38:47 KST | INFO | Training batches:   157
+2026-04-22 06:38:47 KST | INFO | Test batches:       16
+2026-04-22 06:38:47 KST | INFO | 
+2026-04-22 06:38:47 KST | INFO | --------------------------------------------------------------------------------
+2026-04-22 06:38:47 KST | INFO | MODEL INITIALIZATION
+2026-04-22 06:38:47 KST | INFO | --------------------------------------------------------------------------------
+2026-04-22 06:38:48 KST | INFO | Total parameters:     3,245,124
+2026-04-22 06:38:48 KST | INFO | Trainable parameters: 3,245,124
+2026-04-22 06:38:48 KST | INFO | 
+2026-04-22 06:38:48 KST | INFO | --------------------------------------------------------------------------------
+2026-04-22 06:38:48 KST | INFO | OPTIMIZER & SCHEDULER
+2026-04-22 06:38:48 KST | INFO | --------------------------------------------------------------------------------
+2026-04-22 06:38:48 KST | INFO | Optimizer:        SGD (lr=0.1, momentum=0.9)
+2026-04-22 06:38:48 KST | INFO | Scheduler:        cosine
+2026-04-22 06:38:48 KST | INFO | Gradient clip:    1.0
+2026-04-22 06:38:48 KST | INFO | 
+2026-04-22 06:38:48 KST | INFO | --------------------------------------------------------------------------------
+2026-04-22 06:38:48 KST | INFO | TRAINING
+2026-04-22 06:38:48 KST | INFO | --------------------------------------------------------------------------------
+2026-04-22 06:38:48 KST | INFO | 
+2026-04-22 06:38:48 KST | INFO | Epoch 1/200 | LR: 0.100000
+2026-04-22 06:38:55 KST | INFO |   Train Loss: 0.9817 | Test Loss: 0.7537 | Test Acc: 69.97%
+2026-04-22 06:38:55 KST | INFO |   🏆 New best accuracy: 69.97%
+2026-04-22 06:38:55 KST | INFO | 
+2026-04-22 06:38:55 KST | INFO | Epoch 2/200 | LR: 0.099994
+2026-04-22 06:39:02 KST | INFO |   Train Loss: 0.6998 | Test Loss: 0.7990 | Test Acc: 69.53%
+2026-04-22 06:39:02 KST | INFO |   No improvement (1/30)
+2026-04-22 06:39:02 KST | INFO | 
+2026-04-22 06:39:02 KST | INFO | Epoch 3/200 | LR: 0.099975
+2026-04-22 06:39:08 KST | INFO |   Train Loss: 0.5823 | Test Loss: 0.6206 | Test Acc: 73.62%
+2026-04-22 06:39:08 KST | INFO |   🏆 New best accuracy: 73.62%
+2026-04-22 06:39:08 KST | INFO | 
+2026-04-22 06:39:08 KST | INFO | Epoch 4/200 | LR: 0.099944
+2026-04-22 06:39:15 KST | INFO |   Train Loss: 0.5030 | Test Loss: 0.5538 | Test Acc: 78.00%
+2026-04-22 06:39:15 KST | INFO |   🏆 New best accuracy: 78.00%
+2026-04-22 06:39:15 KST | INFO | 
+2026-04-22 06:39:15 KST | INFO | Epoch 5/200 | LR: 0.099901
+2026-04-22 06:39:22 KST | INFO |   Train Loss: 0.4415 | Test Loss: 0.3850 | Test Acc: 84.80%
+2026-04-22 06:39:22 KST | INFO |   🏆 New best accuracy: 84.80%
+2026-04-22 06:39:22 KST | INFO | 
+2026-04-22 06:39:22 KST | INFO | Epoch 6/200 | LR: 0.099846
+2026-04-22 06:39:29 KST | INFO |   Train Loss: 0.4056 | Test Loss: 0.4010 | Test Acc: 84.55%
+2026-04-22 06:39:29 KST | INFO |   No improvement (1/30)
+2026-04-22 06:39:29 KST | INFO | 
+2026-04-22 06:39:29 KST | INFO | Epoch 7/200 | LR: 0.099778
+2026-04-22 06:39:35 KST | INFO |   Train Loss: 0.3746 | Test Loss: 0.4763 | Test Acc: 82.30%
+2026-04-22 06:39:35 KST | INFO |   No improvement (2/30)
+2026-04-22 06:39:35 KST | INFO | 
+2026-04-22 06:39:35 KST | INFO | Epoch 8/200 | LR: 0.099698
+2026-04-22 06:39:43 KST | INFO |   Train Loss: 0.3543 | Test Loss: 0.3532 | Test Acc: 87.22%
+2026-04-22 06:39:43 KST | INFO |   🏆 New best accuracy: 87.22%
+2026-04-22 06:39:43 KST | INFO | 
+2026-04-22 06:39:43 KST | INFO | Epoch 9/200 | LR: 0.099606
+2026-04-22 06:39:49 KST | INFO |   Train Loss: 0.3277 | Test Loss: 0.3387 | Test Acc: 87.03%
+2026-04-22 06:39:49 KST | INFO |   No improvement (1/30)
+2026-04-22 06:39:49 KST | INFO | 
+2026-04-22 06:39:49 KST | INFO | Epoch 10/200 | LR: 0.099501
+2026-04-22 06:39:56 KST | INFO |   Train Loss: 0.3177 | Test Loss: 0.3142 | Test Acc: 88.38%
+2026-04-22 06:39:56 KST | INFO |   🏆 New best accuracy: 88.38%
+2026-04-22 06:39:56 KST | INFO | 
+2026-04-22 06:39:56 KST | INFO | Epoch 11/200 | LR: 0.099384
+2026-04-22 06:40:02 KST | INFO |   Train Loss: 0.3010 | Test Loss: 0.3620 | Test Acc: 86.20%
+2026-04-22 06:40:02 KST | INFO |   No improvement (1/30)
+2026-04-22 06:40:02 KST | INFO | 
+2026-04-22 06:40:02 KST | INFO | Epoch 12/200 | LR: 0.099255
+2026-04-22 06:40:09 KST | INFO |   Train Loss: 0.2893 | Test Loss: 0.3137 | Test Acc: 88.25%
+2026-04-22 06:40:09 KST | INFO |   No improvement (2/30)
+2026-04-22 06:40:09 KST | INFO | 
+2026-04-22 06:40:09 KST | INFO | Epoch 13/200 | LR: 0.099114
+2026-04-22 06:40:16 KST | INFO |   Train Loss: 0.2785 | Test Loss: 0.3235 | Test Acc: 87.15%
+2026-04-22 06:40:16 KST | INFO |   No improvement (3/30)
+2026-04-22 06:40:16 KST | INFO | 
+2026-04-22 06:40:16 KST | INFO | Epoch 14/200 | LR: 0.098961
+2026-04-22 06:40:23 KST | INFO |   Train Loss: 0.2692 | Test Loss: 0.2801 | Test Acc: 89.85%
+2026-04-22 06:40:23 KST | INFO |   🏆 New best accuracy: 89.85%
+2026-04-22 06:40:23 KST | INFO | 
+2026-04-22 06:40:23 KST | INFO | Epoch 15/200 | LR: 0.098796
+2026-04-22 06:40:29 KST | INFO |   Train Loss: 0.2604 | Test Loss: 0.3062 | Test Acc: 88.45%
+2026-04-22 06:40:29 KST | INFO |   No improvement (1/30)
+2026-04-22 06:40:29 KST | INFO | 
+2026-04-22 06:40:29 KST | INFO | Epoch 16/200 | LR: 0.098619
+2026-04-22 06:40:36 KST | INFO |   Train Loss: 0.2527 | Test Loss: 0.3452 | Test Acc: 87.20%
+2026-04-22 06:40:36 KST | INFO |   No improvement (2/30)
+2026-04-22 06:40:36 KST | INFO | 
+2026-04-22 06:40:36 KST | INFO | Epoch 17/200 | LR: 0.098429
+2026-04-22 06:40:42 KST | INFO |   Train Loss: 0.2433 | Test Loss: 0.2720 | Test Acc: 90.47%
+2026-04-22 06:40:42 KST | INFO |   🏆 New best accuracy: 90.47%
+2026-04-22 06:40:42 KST | INFO | 
+2026-04-22 06:40:42 KST | INFO | Epoch 18/200 | LR: 0.098228
+2026-04-22 06:40:49 KST | INFO |   Train Loss: 0.2313 | Test Loss: 0.2856 | Test Acc: 89.78%
+2026-04-22 06:40:49 KST | INFO |   No improvement (1/30)
+2026-04-22 06:40:49 KST | INFO | 
+2026-04-22 06:40:49 KST | INFO | Epoch 19/200 | LR: 0.098015
+2026-04-22 06:40:57 KST | INFO |   Train Loss: 0.2298 | Test Loss: 0.3405 | Test Acc: 88.03%
+2026-04-22 06:40:57 KST | INFO |   No improvement (2/30)
+2026-04-22 06:40:57 KST | INFO | 
+2026-04-22 06:40:57 KST | INFO | Epoch 20/200 | LR: 0.097790
+2026-04-22 06:41:03 KST | INFO |   Train Loss: 0.2188 | Test Loss: 0.3069 | Test Acc: 88.67%
+2026-04-22 06:41:03 KST | INFO |   No improvement (3/30)
+2026-04-22 06:41:03 KST | INFO | 
+2026-04-22 06:41:03 KST | INFO | Epoch 21/200 | LR: 0.097553
+2026-04-22 06:41:10 KST | INFO |   Train Loss: 0.2200 | Test Loss: 0.2548 | Test Acc: 90.35%
+2026-04-22 06:41:10 KST | INFO |   No improvement (4/30)
+2026-04-22 06:41:10 KST | INFO | 
+2026-04-22 06:41:10 KST | INFO | Epoch 22/200 | LR: 0.097304
+2026-04-22 06:41:16 KST | INFO |   Train Loss: 0.2117 | Test Loss: 0.3171 | Test Acc: 89.50%
+2026-04-22 06:41:16 KST | INFO |   No improvement (5/30)
+2026-04-22 06:41:16 KST | INFO | 
+2026-04-22 06:41:16 KST | INFO | Epoch 23/200 | LR: 0.097044
+2026-04-22 06:41:23 KST | INFO |   Train Loss: 0.2098 | Test Loss: 0.2629 | Test Acc: 91.05%
+2026-04-22 06:41:23 KST | INFO |   🏆 New best accuracy: 91.05%
+2026-04-22 06:41:23 KST | INFO | 
+2026-04-22 06:41:23 KST | INFO | Epoch 24/200 | LR: 0.096772
+2026-04-22 06:41:30 KST | INFO |   Train Loss: 0.2016 | Test Loss: 0.2335 | Test Acc: 91.60%
+2026-04-22 06:41:30 KST | INFO |   🏆 New best accuracy: 91.60%
+2026-04-22 06:41:30 KST | INFO | 
+2026-04-22 06:41:30 KST | INFO | Epoch 25/200 | LR: 0.096489
+2026-04-22 06:41:37 KST | INFO |   Train Loss: 0.2044 | Test Loss: 0.2597 | Test Acc: 90.65%
+2026-04-22 06:41:37 KST | INFO |   No improvement (1/30)
+2026-04-22 06:41:37 KST | INFO | 
+2026-04-22 06:41:37 KST | INFO | Epoch 26/200 | LR: 0.096194
+2026-04-22 06:41:43 KST | INFO |   Train Loss: 0.1975 | Test Loss: 0.2743 | Test Acc: 90.12%
+2026-04-22 06:41:43 KST | INFO |   No improvement (2/30)
+2026-04-22 06:41:43 KST | INFO | 
+2026-04-22 06:41:43 KST | INFO | Epoch 27/200 | LR: 0.095888
+2026-04-22 06:41:50 KST | INFO |   Train Loss: 0.1933 | Test Loss: 0.2674 | Test Acc: 91.15%
+2026-04-22 06:41:50 KST | INFO |   No improvement (3/30)
+2026-04-22 06:41:50 KST | INFO | 
+2026-04-22 06:41:50 KST | INFO | Epoch 28/200 | LR: 0.095570
+2026-04-22 06:41:57 KST | INFO |   Train Loss: 0.1930 | Test Loss: 0.2428 | Test Acc: 91.75%
+2026-04-22 06:41:57 KST | INFO |   🏆 New best accuracy: 91.75%
+2026-04-22 06:41:57 KST | INFO | 
+2026-04-22 06:41:57 KST | INFO | Epoch 29/200 | LR: 0.095241
+2026-04-22 06:42:04 KST | INFO |   Train Loss: 0.1869 | Test Loss: 0.2446 | Test Acc: 90.40%
+2026-04-22 06:42:04 KST | INFO |   No improvement (1/30)
+2026-04-22 06:42:04 KST | INFO | 
+2026-04-22 06:42:04 KST | INFO | Epoch 30/200 | LR: 0.094901
+2026-04-22 06:42:10 KST | INFO |   Train Loss: 0.1807 | Test Loss: 0.2569 | Test Acc: 90.92%
+2026-04-22 06:42:10 KST | INFO |   No improvement (2/30)
+2026-04-22 06:42:10 KST | INFO | 
+2026-04-22 06:42:10 KST | INFO | Epoch 31/200 | LR: 0.094550
+2026-04-22 06:42:17 KST | INFO |   Train Loss: 0.1769 | Test Loss: 0.2843 | Test Acc: 90.05%
+2026-04-22 06:42:17 KST | INFO |   No improvement (3/30)
+2026-04-22 06:42:17 KST | INFO | 
+2026-04-22 06:42:17 KST | INFO | Epoch 32/200 | LR: 0.094188
+2026-04-22 06:42:23 KST | INFO |   Train Loss: 0.1771 | Test Loss: 0.2508 | Test Acc: 91.83%
+2026-04-22 06:42:23 KST | INFO |   🏆 New best accuracy: 91.83%
+2026-04-22 06:42:23 KST | INFO | 
+2026-04-22 06:42:23 KST | INFO | Epoch 33/200 | LR: 0.093815
+2026-04-22 06:42:30 KST | INFO |   Train Loss: 0.1712 | Test Loss: 0.2213 | Test Acc: 92.17%
+2026-04-22 06:42:30 KST | INFO |   🏆 New best accuracy: 92.17%
+2026-04-22 06:42:30 KST | INFO | 
+2026-04-22 06:42:30 KST | INFO | Epoch 34/200 | LR: 0.093432
+2026-04-22 06:42:37 KST | INFO |   Train Loss: 0.1669 | Test Loss: 0.2380 | Test Acc: 91.70%
+2026-04-22 06:42:37 KST | INFO |   No improvement (1/30)
+2026-04-22 06:42:37 KST | INFO | 
+2026-04-22 06:42:37 KST | INFO | Epoch 35/200 | LR: 0.093037
+2026-04-22 06:42:43 KST | INFO |   Train Loss: 0.1687 | Test Loss: 0.2367 | Test Acc: 92.00%
+2026-04-22 06:42:43 KST | INFO |   No improvement (2/30)
+2026-04-22 06:42:43 KST | INFO | 
+2026-04-22 06:42:43 KST | INFO | Epoch 36/200 | LR: 0.092632
+2026-04-22 06:42:50 KST | INFO |   Train Loss: 0.1643 | Test Loss: 0.2396 | Test Acc: 91.97%
+2026-04-22 06:42:50 KST | INFO |   No improvement (3/30)
+2026-04-22 06:42:50 KST | INFO | 
+2026-04-22 06:42:50 KST | INFO | Epoch 37/200 | LR: 0.092216
+2026-04-22 06:42:57 KST | INFO |   Train Loss: 0.1645 | Test Loss: 0.2644 | Test Acc: 91.40%
+2026-04-22 06:42:57 KST | INFO |   No improvement (4/30)
+2026-04-22 06:42:57 KST | INFO | 
+2026-04-22 06:42:57 KST | INFO | Epoch 38/200 | LR: 0.091790
+2026-04-22 06:43:03 KST | INFO |   Train Loss: 0.1614 | Test Loss: 0.4001 | Test Acc: 88.17%
+2026-04-22 06:43:03 KST | INFO |   No improvement (5/30)
+2026-04-22 06:43:03 KST | INFO | 
+2026-04-22 06:43:03 KST | INFO | Epoch 39/200 | LR: 0.091354
+2026-04-22 06:43:10 KST | INFO |   Train Loss: 0.1656 | Test Loss: 0.3526 | Test Acc: 88.70%
+2026-04-22 06:43:10 KST | INFO |   No improvement (6/30)
+2026-04-22 06:43:10 KST | INFO | 
+2026-04-22 06:43:10 KST | INFO | Epoch 40/200 | LR: 0.090908
+2026-04-22 06:43:17 KST | INFO |   Train Loss: 0.1571 | Test Loss: 0.2631 | Test Acc: 91.40%
+2026-04-22 06:43:17 KST | INFO |   No improvement (7/30)
+2026-04-22 06:43:17 KST | INFO | 
+2026-04-22 06:43:17 KST | INFO | Epoch 41/200 | LR: 0.090451
+2026-04-22 06:43:24 KST | INFO |   Train Loss: 0.1547 | Test Loss: 0.2456 | Test Acc: 91.53%
+2026-04-22 06:43:24 KST | INFO |   No improvement (8/30)
+2026-04-22 06:43:24 KST | INFO | 
+2026-04-22 06:43:24 KST | INFO | Epoch 42/200 | LR: 0.089984
+2026-04-22 06:43:30 KST | INFO |   Train Loss: 0.1530 | Test Loss: 0.2275 | Test Acc: 92.17%
+2026-04-22 06:43:30 KST | INFO |   No improvement (9/30)
+2026-04-22 06:43:30 KST | INFO | 
+2026-04-22 06:43:30 KST | INFO | Epoch 43/200 | LR: 0.089508
+2026-04-22 06:43:37 KST | INFO |   Train Loss: 0.1519 | Test Loss: 0.2588 | Test Acc: 90.85%
+2026-04-22 06:43:37 KST | INFO |   No improvement (10/30)
+2026-04-22 06:43:37 KST | INFO | 
+2026-04-22 06:43:37 KST | INFO | Epoch 44/200 | LR: 0.089022
+2026-04-22 06:43:44 KST | INFO |   Train Loss: 0.1543 | Test Loss: 0.2276 | Test Acc: 92.47%
+2026-04-22 06:43:44 KST | INFO |   🏆 New best accuracy: 92.47%
+2026-04-22 06:43:44 KST | INFO | 
+2026-04-22 06:43:44 KST | INFO | Epoch 45/200 | LR: 0.088526
+2026-04-22 06:43:50 KST | INFO |   Train Loss: 0.1468 | Test Loss: 0.2495 | Test Acc: 91.65%
+2026-04-22 06:43:50 KST | INFO |   No improvement (1/30)
+2026-04-22 06:43:50 KST | INFO | 
+2026-04-22 06:43:50 KST | INFO | Epoch 46/200 | LR: 0.088020
+2026-04-22 06:43:57 KST | INFO |   Train Loss: 0.1425 | Test Loss: 0.2561 | Test Acc: 91.83%
+2026-04-22 06:43:57 KST | INFO |   No improvement (2/30)
+2026-04-22 06:43:57 KST | INFO | 
+2026-04-22 06:43:57 KST | INFO | Epoch 47/200 | LR: 0.087506
+2026-04-22 06:44:04 KST | INFO |   Train Loss: 0.1447 | Test Loss: 0.2540 | Test Acc: 91.78%
+2026-04-22 06:44:04 KST | INFO |   No improvement (3/30)
+2026-04-22 06:44:04 KST | INFO | 
+2026-04-22 06:44:04 KST | INFO | Epoch 48/200 | LR: 0.086982
+2026-04-22 06:44:10 KST | INFO |   Train Loss: 0.1406 | Test Loss: 0.2632 | Test Acc: 91.83%
+2026-04-22 06:44:10 KST | INFO |   No improvement (4/30)
+2026-04-22 06:44:10 KST | INFO | 
+2026-04-22 06:44:10 KST | INFO | Epoch 49/200 | LR: 0.086449
+2026-04-22 06:44:17 KST | INFO |   Train Loss: 0.1385 | Test Loss: 0.2671 | Test Acc: 91.17%
+2026-04-22 06:44:17 KST | INFO |   No improvement (5/30)
+2026-04-22 06:44:17 KST | INFO | 
+2026-04-22 06:44:17 KST | INFO | Epoch 50/200 | LR: 0.085906
+2026-04-22 06:44:23 KST | INFO |   Train Loss: 0.1377 | Test Loss: 0.2017 | Test Acc: 93.03%
+2026-04-22 06:44:23 KST | INFO |   🏆 New best accuracy: 93.03%
+2026-04-22 06:44:23 KST | INFO | 
+2026-04-22 06:44:23 KST | INFO | Epoch 51/200 | LR: 0.085355
+2026-04-22 06:44:30 KST | INFO |   Train Loss: 0.1378 | Test Loss: 0.2310 | Test Acc: 91.78%
+2026-04-22 06:44:30 KST | INFO |   No improvement (1/30)
+2026-04-22 06:44:30 KST | INFO | 
+2026-04-22 06:44:30 KST | INFO | Epoch 52/200 | LR: 0.084796
+2026-04-22 06:44:37 KST | INFO |   Train Loss: 0.1332 | Test Loss: 0.2051 | Test Acc: 92.92%
+2026-04-22 06:44:37 KST | INFO |   No improvement (2/30)
+2026-04-22 06:44:37 KST | INFO | 
+2026-04-22 06:44:37 KST | INFO | Epoch 53/200 | LR: 0.084228
+2026-04-22 06:44:43 KST | INFO |   Train Loss: 0.1301 | Test Loss: 0.2231 | Test Acc: 91.80%
+2026-04-22 06:44:43 KST | INFO |   No improvement (3/30)
+2026-04-22 06:44:43 KST | INFO | 
+2026-04-22 06:44:43 KST | INFO | Epoch 54/200 | LR: 0.083651
+2026-04-22 06:44:50 KST | INFO |   Train Loss: 0.1321 | Test Loss: 0.2912 | Test Acc: 91.12%
+2026-04-22 06:44:50 KST | INFO |   No improvement (4/30)
+2026-04-22 06:44:50 KST | INFO | 
+2026-04-22 06:44:50 KST | INFO | Epoch 55/200 | LR: 0.083066
+2026-04-22 06:44:57 KST | INFO |   Train Loss: 0.1360 | Test Loss: 0.2558 | Test Acc: 91.88%
+2026-04-22 06:44:57 KST | INFO |   No improvement (5/30)
+2026-04-22 06:44:57 KST | INFO | 
+2026-04-22 06:44:57 KST | INFO | Epoch 56/200 | LR: 0.082473
+2026-04-22 06:45:03 KST | INFO |   Train Loss: 0.1278 | Test Loss: 0.3021 | Test Acc: 90.75%
+2026-04-22 06:45:03 KST | INFO |   No improvement (6/30)
+2026-04-22 06:45:03 KST | INFO | 
+2026-04-22 06:45:03 KST | INFO | Epoch 57/200 | LR: 0.081871
+2026-04-22 06:45:10 KST | INFO |   Train Loss: 0.1323 | Test Loss: 0.2158 | Test Acc: 92.75%
+2026-04-22 06:45:10 KST | INFO |   No improvement (7/30)
+2026-04-22 06:45:10 KST | INFO | 
+2026-04-22 06:45:10 KST | INFO | Epoch 58/200 | LR: 0.081262
+2026-04-22 06:45:17 KST | INFO |   Train Loss: 0.1287 | Test Loss: 0.3664 | Test Acc: 89.80%
+2026-04-22 06:45:17 KST | INFO |   No improvement (8/30)
+2026-04-22 06:45:17 KST | INFO | 
+2026-04-22 06:45:17 KST | INFO | Epoch 59/200 | LR: 0.080646
+2026-04-22 06:45:24 KST | INFO |   Train Loss: 0.1257 | Test Loss: 0.2474 | Test Acc: 92.25%
+2026-04-22 06:45:24 KST | INFO |   No improvement (9/30)
+2026-04-22 06:45:24 KST | INFO | 
+2026-04-22 06:45:24 KST | INFO | Epoch 60/200 | LR: 0.080021
+2026-04-22 06:45:30 KST | INFO |   Train Loss: 0.1266 | Test Loss: 0.2353 | Test Acc: 92.28%
+2026-04-22 06:45:30 KST | INFO |   No improvement (10/30)
+2026-04-22 06:45:30 KST | INFO | 
+2026-04-22 06:45:30 KST | INFO | Epoch 61/200 | LR: 0.079389
+2026-04-22 06:45:37 KST | INFO |   Train Loss: 0.1241 | Test Loss: 0.2078 | Test Acc: 93.20%
+2026-04-22 06:45:37 KST | INFO |   🏆 New best accuracy: 93.20%
+2026-04-22 06:45:37 KST | INFO | 
+2026-04-22 06:45:37 KST | INFO | Epoch 62/200 | LR: 0.078750
+2026-04-22 06:45:43 KST | INFO |   Train Loss: 0.1177 | Test Loss: 0.2678 | Test Acc: 91.67%
+2026-04-22 06:45:43 KST | INFO |   No improvement (1/30)
+2026-04-22 06:45:43 KST | INFO | 
+2026-04-22 06:45:43 KST | INFO | Epoch 63/200 | LR: 0.078104
+2026-04-22 06:45:50 KST | INFO |   Train Loss: 0.1185 | Test Loss: 0.2372 | Test Acc: 92.45%
+2026-04-22 06:45:50 KST | INFO |   No improvement (2/30)
+2026-04-22 06:45:50 KST | INFO | 
+2026-04-22 06:45:50 KST | INFO | Epoch 64/200 | LR: 0.077451
+2026-04-22 06:45:56 KST | INFO |   Train Loss: 0.1174 | Test Loss: 0.2342 | Test Acc: 92.72%
+2026-04-22 06:45:56 KST | INFO |   No improvement (3/30)
+2026-04-22 06:45:56 KST | INFO | 
+2026-04-22 06:45:56 KST | INFO | Epoch 65/200 | LR: 0.076792
+2026-04-22 06:46:03 KST | INFO |   Train Loss: 0.1158 | Test Loss: 0.2628 | Test Acc: 91.75%
+2026-04-22 06:46:03 KST | INFO |   No improvement (4/30)
+2026-04-22 06:46:03 KST | INFO | 
+2026-04-22 06:46:03 KST | INFO | Epoch 66/200 | LR: 0.076125
+2026-04-22 06:46:10 KST | INFO |   Train Loss: 0.1150 | Test Loss: 0.2388 | Test Acc: 92.92%
+2026-04-22 06:46:10 KST | INFO |   No improvement (5/30)
+2026-04-22 06:46:10 KST | INFO | 
+2026-04-22 06:46:10 KST | INFO | Epoch 67/200 | LR: 0.075452
+2026-04-22 06:46:16 KST | INFO |   Train Loss: 0.1086 | Test Loss: 0.2897 | Test Acc: 90.50%
+2026-04-22 06:46:16 KST | INFO |   No improvement (6/30)
+2026-04-22 06:46:16 KST | INFO | 
+2026-04-22 06:46:16 KST | INFO | Epoch 68/200 | LR: 0.074773
+2026-04-22 06:46:23 KST | INFO |   Train Loss: 0.1104 | Test Loss: 0.2053 | Test Acc: 93.22%
+2026-04-22 06:46:23 KST | INFO |   🏆 New best accuracy: 93.22%
+2026-04-22 06:46:23 KST | INFO | 
+2026-04-22 06:46:23 KST | INFO | Epoch 69/200 | LR: 0.074088
+2026-04-22 06:46:30 KST | INFO |   Train Loss: 0.1070 | Test Loss: 0.2320 | Test Acc: 92.78%
+2026-04-22 06:46:30 KST | INFO |   No improvement (1/30)
+2026-04-22 06:46:30 KST | INFO | 
+2026-04-22 06:46:30 KST | INFO | Epoch 70/200 | LR: 0.073397
+2026-04-22 06:46:36 KST | INFO |   Train Loss: 0.1082 | Test Loss: 0.2466 | Test Acc: 92.80%
+2026-04-22 06:46:36 KST | INFO |   No improvement (2/30)
+2026-04-22 06:46:36 KST | INFO | 
+2026-04-22 06:46:36 KST | INFO | Epoch 71/200 | LR: 0.072700
+2026-04-22 06:46:43 KST | INFO |   Train Loss: 0.1051 | Test Loss: 0.2412 | Test Acc: 92.85%
+2026-04-22 06:46:43 KST | INFO |   No improvement (3/30)
+2026-04-22 06:46:43 KST | INFO | 
+2026-04-22 06:46:43 KST | INFO | Epoch 72/200 | LR: 0.071997
+2026-04-22 06:46:50 KST | INFO |   Train Loss: 0.1070 | Test Loss: 0.2104 | Test Acc: 92.85%
+2026-04-22 06:46:50 KST | INFO |   No improvement (4/30)
+2026-04-22 06:46:50 KST | INFO | 
+2026-04-22 06:46:50 KST | INFO | Epoch 73/200 | LR: 0.071289
+2026-04-22 06:46:56 KST | INFO |   Train Loss: 0.1011 | Test Loss: 0.2490 | Test Acc: 93.15%
+2026-04-22 06:46:56 KST | INFO |   No improvement (5/30)
+2026-04-22 06:46:56 KST | INFO | 
+2026-04-22 06:46:56 KST | INFO | Epoch 74/200 | LR: 0.070576
+2026-04-22 06:47:03 KST | INFO |   Train Loss: 0.0984 | Test Loss: 0.3576 | Test Acc: 90.00%
+2026-04-22 06:47:03 KST | INFO |   No improvement (6/30)
+2026-04-22 06:47:03 KST | INFO | 
+2026-04-22 06:47:03 KST | INFO | Epoch 75/200 | LR: 0.069858
+2026-04-22 06:47:09 KST | INFO |   Train Loss: 0.0953 | Test Loss: 0.2272 | Test Acc: 93.12%
+2026-04-22 06:47:09 KST | INFO |   No improvement (7/30)
+2026-04-22 06:47:09 KST | INFO | 
+2026-04-22 06:47:09 KST | INFO | Epoch 76/200 | LR: 0.069134
+2026-04-22 06:47:16 KST | INFO |   Train Loss: 0.0985 | Test Loss: 0.2132 | Test Acc: 93.38%
+2026-04-22 06:47:16 KST | INFO |   🏆 New best accuracy: 93.38%
+2026-04-22 06:47:16 KST | INFO | 
+2026-04-22 06:47:16 KST | INFO | Epoch 77/200 | LR: 0.068407
+2026-04-22 06:47:23 KST | INFO |   Train Loss: 0.0932 | Test Loss: 0.2508 | Test Acc: 92.90%
+2026-04-22 06:47:23 KST | INFO |   No improvement (1/30)
+2026-04-22 06:47:23 KST | INFO | 
+2026-04-22 06:47:23 KST | INFO | Epoch 78/200 | LR: 0.067674
+2026-04-22 06:47:30 KST | INFO |   Train Loss: 0.0906 | Test Loss: 0.2752 | Test Acc: 92.22%
+2026-04-22 06:47:30 KST | INFO |   No improvement (2/30)
+2026-04-22 06:47:30 KST | INFO | 
+2026-04-22 06:47:30 KST | INFO | Epoch 79/200 | LR: 0.066937
+2026-04-22 06:47:36 KST | INFO |   Train Loss: 0.0954 | Test Loss: 0.2346 | Test Acc: 92.38%
+2026-04-22 06:47:36 KST | INFO |   No improvement (3/30)
+2026-04-22 06:47:36 KST | INFO | 
+2026-04-22 06:47:36 KST | INFO | Epoch 80/200 | LR: 0.066196
+2026-04-22 06:47:43 KST | INFO |   Train Loss: 0.0930 | Test Loss: 0.2553 | Test Acc: 92.55%
+2026-04-22 06:47:43 KST | INFO |   No improvement (4/30)
+2026-04-22 06:47:43 KST | INFO | 
+2026-04-22 06:47:43 KST | INFO | Epoch 81/200 | LR: 0.065451
+2026-04-22 06:47:49 KST | INFO |   Train Loss: 0.0870 | Test Loss: 0.2083 | Test Acc: 93.65%
+2026-04-22 06:47:49 KST | INFO |   🏆 New best accuracy: 93.65%
+2026-04-22 06:47:49 KST | INFO | 
+2026-04-22 06:47:49 KST | INFO | Epoch 82/200 | LR: 0.064702
+2026-04-22 06:47:56 KST | INFO |   Train Loss: 0.0871 | Test Loss: 0.2441 | Test Acc: 92.83%
+2026-04-22 06:47:56 KST | INFO |   No improvement (1/30)
+2026-04-22 06:47:56 KST | INFO | 
+2026-04-22 06:47:56 KST | INFO | Epoch 83/200 | LR: 0.063950
+2026-04-22 06:48:02 KST | INFO |   Train Loss: 0.0838 | Test Loss: 0.2827 | Test Acc: 93.22%
+2026-04-22 06:48:02 KST | INFO |   No improvement (2/30)
+2026-04-22 06:48:02 KST | INFO | 
+2026-04-22 06:48:02 KST | INFO | Epoch 84/200 | LR: 0.063194
+2026-04-22 06:48:09 KST | INFO |   Train Loss: 0.0813 | Test Loss: 0.2836 | Test Acc: 91.80%
+2026-04-22 06:48:09 KST | INFO |   No improvement (3/30)
+2026-04-22 06:48:09 KST | INFO | 
+2026-04-22 06:48:09 KST | INFO | Epoch 85/200 | LR: 0.062435
+2026-04-22 06:48:16 KST | INFO |   Train Loss: 0.0798 | Test Loss: 0.2589 | Test Acc: 92.42%
+2026-04-22 06:48:16 KST | INFO |   No improvement (4/30)
+2026-04-22 06:48:16 KST | INFO | 
+2026-04-22 06:48:16 KST | INFO | Epoch 86/200 | LR: 0.061673
+2026-04-22 06:48:22 KST | INFO |   Train Loss: 0.0783 | Test Loss: 0.2596 | Test Acc: 93.15%
+2026-04-22 06:48:22 KST | INFO |   No improvement (5/30)
+2026-04-22 06:48:22 KST | INFO | 
+2026-04-22 06:48:22 KST | INFO | Epoch 87/200 | LR: 0.060908
+2026-04-22 06:48:29 KST | INFO |   Train Loss: 0.0822 | Test Loss: 0.2867 | Test Acc: 92.50%
+2026-04-22 06:48:29 KST | INFO |   No improvement (6/30)
+2026-04-22 06:48:29 KST | INFO | 
+2026-04-22 06:48:29 KST | INFO | Epoch 88/200 | LR: 0.060140
+2026-04-22 06:48:36 KST | INFO |   Train Loss: 0.0845 | Test Loss: 0.2225 | Test Acc: 93.53%
+2026-04-22 06:48:36 KST | INFO |   No improvement (7/30)
+2026-04-22 06:48:36 KST | INFO | 
+2026-04-22 06:48:36 KST | INFO | Epoch 89/200 | LR: 0.059369
+2026-04-22 06:48:42 KST | INFO |   Train Loss: 0.0808 | Test Loss: 0.3266 | Test Acc: 92.38%
+2026-04-22 06:48:42 KST | INFO |   No improvement (8/30)
+2026-04-22 06:48:42 KST | INFO | 
+2026-04-22 06:48:42 KST | INFO | Epoch 90/200 | LR: 0.058597
+2026-04-22 06:48:49 KST | INFO |   Train Loss: 0.0790 | Test Loss: 0.2207 | Test Acc: 93.78%
+2026-04-22 06:48:49 KST | INFO |   🏆 New best accuracy: 93.78%
+2026-04-22 06:48:49 KST | INFO | 
+2026-04-22 06:48:49 KST | INFO | Epoch 91/200 | LR: 0.057822
+2026-04-22 06:48:55 KST | INFO |   Train Loss: 0.0755 | Test Loss: 0.2403 | Test Acc: 92.92%
+2026-04-22 06:48:55 KST | INFO |   No improvement (1/30)
+2026-04-22 06:48:55 KST | INFO | 
+2026-04-22 06:48:55 KST | INFO | Epoch 92/200 | LR: 0.057045
+2026-04-22 06:49:02 KST | INFO |   Train Loss: 0.0765 | Test Loss: 0.2235 | Test Acc: 93.00%
+2026-04-22 06:49:02 KST | INFO |   No improvement (2/30)
+2026-04-22 06:49:02 KST | INFO | 
+2026-04-22 06:49:02 KST | INFO | Epoch 93/200 | LR: 0.056267
+2026-04-22 06:49:08 KST | INFO |   Train Loss: 0.0704 | Test Loss: 0.2218 | Test Acc: 93.40%
+2026-04-22 06:49:08 KST | INFO |   No improvement (3/30)
+2026-04-22 06:49:08 KST | INFO | 
+2026-04-22 06:49:08 KST | INFO | Epoch 94/200 | LR: 0.055487
+2026-04-22 06:49:15 KST | INFO |   Train Loss: 0.0728 | Test Loss: 0.2520 | Test Acc: 92.88%
+2026-04-22 06:49:15 KST | INFO |   No improvement (4/30)
+2026-04-22 06:49:15 KST | INFO | 
+2026-04-22 06:49:15 KST | INFO | Epoch 95/200 | LR: 0.054706
+2026-04-22 06:49:22 KST | INFO |   Train Loss: 0.0726 | Test Loss: 0.2214 | Test Acc: 93.78%
+2026-04-22 06:49:22 KST | INFO |   No improvement (5/30)
+2026-04-22 06:49:22 KST | INFO | 
+2026-04-22 06:49:22 KST | INFO | Epoch 96/200 | LR: 0.053923
+2026-04-22 06:49:28 KST | INFO |   Train Loss: 0.0658 | Test Loss: 0.2533 | Test Acc: 92.65%
+2026-04-22 06:49:28 KST | INFO |   No improvement (6/30)
+2026-04-22 06:49:28 KST | INFO | 
+2026-04-22 06:49:28 KST | INFO | Epoch 97/200 | LR: 0.053140
+2026-04-22 06:49:35 KST | INFO |   Train Loss: 0.0657 | Test Loss: 0.2516 | Test Acc: 93.35%
+2026-04-22 06:49:35 KST | INFO |   No improvement (7/30)
+2026-04-22 06:49:35 KST | INFO | 
+2026-04-22 06:49:35 KST | INFO | Epoch 98/200 | LR: 0.052356
+2026-04-22 06:49:42 KST | INFO |   Train Loss: 0.0643 | Test Loss: 0.2158 | Test Acc: 94.22%
+2026-04-22 06:49:42 KST | INFO |   🏆 New best accuracy: 94.22%
+2026-04-22 06:49:42 KST | INFO | 
+2026-04-22 06:49:42 KST | INFO | Epoch 99/200 | LR: 0.051571
+2026-04-22 06:49:49 KST | INFO |   Train Loss: 0.0645 | Test Loss: 0.2312 | Test Acc: 93.80%
+2026-04-22 06:49:49 KST | INFO |   No improvement (1/30)
+2026-04-22 06:49:49 KST | INFO | 
+2026-04-22 06:49:49 KST | INFO | Epoch 100/200 | LR: 0.050786
+2026-04-22 06:49:56 KST | INFO |   Train Loss: 0.0663 | Test Loss: 0.2336 | Test Acc: 93.78%
+2026-04-22 06:49:56 KST | INFO |   No improvement (2/30)
+2026-04-22 06:49:56 KST | INFO | 
+2026-04-22 06:49:56 KST | INFO | Epoch 101/200 | LR: 0.050001
+2026-04-22 06:50:03 KST | INFO |   Train Loss: 0.0608 | Test Loss: 0.2018 | Test Acc: 94.53%
+2026-04-22 06:50:03 KST | INFO |   🏆 New best accuracy: 94.53%
+2026-04-22 06:50:03 KST | INFO | 
+2026-04-22 06:50:03 KST | INFO | Epoch 102/200 | LR: 0.049215
+2026-04-22 06:50:09 KST | INFO |   Train Loss: 0.0630 | Test Loss: 0.2724 | Test Acc: 92.75%
+2026-04-22 06:50:09 KST | INFO |   No improvement (1/30)
+2026-04-22 06:50:09 KST | INFO | 
+2026-04-22 06:50:09 KST | INFO | Epoch 103/200 | LR: 0.048430
+2026-04-22 06:50:16 KST | INFO |   Train Loss: 0.0581 | Test Loss: 0.1878 | Test Acc: 94.50%
+2026-04-22 06:50:16 KST | INFO |   No improvement (2/30)
+2026-04-22 06:50:16 KST | INFO | 
+2026-04-22 06:50:16 KST | INFO | Epoch 104/200 | LR: 0.047645
+2026-04-22 06:50:23 KST | INFO |   Train Loss: 0.0602 | Test Loss: 0.2567 | Test Acc: 92.62%
+2026-04-22 06:50:23 KST | INFO |   No improvement (3/30)
+2026-04-22 06:50:23 KST | INFO | 
+2026-04-22 06:50:23 KST | INFO | Epoch 105/200 | LR: 0.046861
+2026-04-22 06:50:30 KST | INFO |   Train Loss: 0.0584 | Test Loss: 0.2185 | Test Acc: 93.97%
+2026-04-22 06:50:30 KST | INFO |   No improvement (4/30)
+2026-04-22 06:50:30 KST | INFO | 
+2026-04-22 06:50:30 KST | INFO | Epoch 106/200 | LR: 0.046078
+2026-04-22 06:50:36 KST | INFO |   Train Loss: 0.0547 | Test Loss: 0.2205 | Test Acc: 94.10%
+2026-04-22 06:50:36 KST | INFO |   No improvement (5/30)
+2026-04-22 06:50:36 KST | INFO | 
+2026-04-22 06:50:36 KST | INFO | Epoch 107/200 | LR: 0.045295
+2026-04-22 06:50:43 KST | INFO |   Train Loss: 0.0525 | Test Loss: 0.2527 | Test Acc: 93.38%
+2026-04-22 06:50:43 KST | INFO |   No improvement (6/30)
+2026-04-22 06:50:43 KST | INFO | 
+2026-04-22 06:50:43 KST | INFO | Epoch 108/200 | LR: 0.044514
+2026-04-22 06:50:50 KST | INFO |   Train Loss: 0.0537 | Test Loss: 0.2282 | Test Acc: 93.92%
+2026-04-22 06:50:50 KST | INFO |   No improvement (7/30)
+2026-04-22 06:50:50 KST | INFO | 
+2026-04-22 06:50:50 KST | INFO | Epoch 109/200 | LR: 0.043734
+2026-04-22 06:50:56 KST | INFO |   Train Loss: 0.0508 | Test Loss: 0.2544 | Test Acc: 94.17%
+2026-04-22 06:50:56 KST | INFO |   No improvement (8/30)
+2026-04-22 06:50:56 KST | INFO | 
+2026-04-22 06:50:56 KST | INFO | Epoch 110/200 | LR: 0.042956
+2026-04-22 06:51:03 KST | INFO |   Train Loss: 0.0489 | Test Loss: 0.1993 | Test Acc: 94.17%
+2026-04-22 06:51:03 KST | INFO |   No improvement (9/30)
+2026-04-22 06:51:03 KST | INFO | 
+2026-04-22 06:51:03 KST | INFO | Epoch 111/200 | LR: 0.042179
+2026-04-22 06:51:10 KST | INFO |   Train Loss: 0.0490 | Test Loss: 0.2601 | Test Acc: 93.33%
+2026-04-22 06:51:10 KST | INFO |   No improvement (10/30)
+2026-04-22 06:51:10 KST | INFO | 
+2026-04-22 06:51:10 KST | INFO | Epoch 112/200 | LR: 0.041404
+2026-04-22 06:51:17 KST | INFO |   Train Loss: 0.0442 | Test Loss: 0.2820 | Test Acc: 93.15%
+2026-04-22 06:51:17 KST | INFO |   No improvement (11/30)
+2026-04-22 06:51:17 KST | INFO | 
+2026-04-22 06:51:17 KST | INFO | Epoch 113/200 | LR: 0.040632
+2026-04-22 06:51:23 KST | INFO |   Train Loss: 0.0453 | Test Loss: 0.2252 | Test Acc: 93.92%
+2026-04-22 06:51:23 KST | INFO |   No improvement (12/30)
+2026-04-22 06:51:23 KST | INFO | 
+2026-04-22 06:51:23 KST | INFO | Epoch 114/200 | LR: 0.039861
+2026-04-22 06:51:30 KST | INFO |   Train Loss: 0.0427 | Test Loss: 0.2596 | Test Acc: 93.45%
+2026-04-22 06:51:30 KST | INFO |   No improvement (13/30)
+2026-04-22 06:51:30 KST | INFO | 
+2026-04-22 06:51:30 KST | INFO | Epoch 115/200 | LR: 0.039093
+2026-04-22 06:51:37 KST | INFO |   Train Loss: 0.0426 | Test Loss: 0.2446 | Test Acc: 93.72%
+2026-04-22 06:51:37 KST | INFO |   No improvement (14/30)
+2026-04-22 06:51:37 KST | INFO | 
+2026-04-22 06:51:37 KST | INFO | Epoch 116/200 | LR: 0.038328
+2026-04-22 06:51:43 KST | INFO |   Train Loss: 0.0366 | Test Loss: 0.2088 | Test Acc: 94.30%
+2026-04-22 06:51:43 KST | INFO |   No improvement (15/30)
+2026-04-22 06:51:43 KST | INFO | 
+2026-04-22 06:51:43 KST | INFO | Epoch 117/200 | LR: 0.037566
+2026-04-22 06:51:51 KST | INFO |   Train Loss: 0.0406 | Test Loss: 0.2857 | Test Acc: 92.67%
+2026-04-22 06:51:51 KST | INFO |   No improvement (16/30)
+2026-04-22 06:51:51 KST | INFO | 
+2026-04-22 06:51:51 KST | INFO | Epoch 118/200 | LR: 0.036807
+2026-04-22 06:51:57 KST | INFO |   Train Loss: 0.0395 | Test Loss: 0.2429 | Test Acc: 94.40%
+2026-04-22 06:51:57 KST | INFO |   No improvement (17/30)
+2026-04-22 06:51:57 KST | INFO | 
+2026-04-22 06:51:57 KST | INFO | Epoch 119/200 | LR: 0.036051
+2026-04-22 06:52:04 KST | INFO |   Train Loss: 0.0349 | Test Loss: 0.2395 | Test Acc: 94.15%
+2026-04-22 06:52:04 KST | INFO |   No improvement (18/30)
+2026-04-22 06:52:04 KST | INFO | 
+2026-04-22 06:52:04 KST | INFO | Epoch 120/200 | LR: 0.035299
+2026-04-22 06:52:11 KST | INFO |   Train Loss: 0.0378 | Test Loss: 0.2530 | Test Acc: 94.20%
+2026-04-22 06:52:11 KST | INFO |   No improvement (19/30)
+2026-04-22 06:52:11 KST | INFO | 
+2026-04-22 06:52:11 KST | INFO | Epoch 121/200 | LR: 0.034550
+2026-04-22 06:52:18 KST | INFO |   Train Loss: 0.0368 | Test Loss: 0.2135 | Test Acc: 94.05%
+2026-04-22 06:52:18 KST | INFO |   No improvement (20/30)
+2026-04-22 06:52:18 KST | INFO | 
+2026-04-22 06:52:18 KST | INFO | Epoch 122/200 | LR: 0.033805
+2026-04-22 06:52:24 KST | INFO |   Train Loss: 0.0332 | Test Loss: 0.2720 | Test Acc: 94.03%
+2026-04-22 06:52:24 KST | INFO |   No improvement (21/30)
+2026-04-22 06:52:24 KST | INFO | 
+2026-04-22 06:52:24 KST | INFO | Epoch 123/200 | LR: 0.033064
+2026-04-22 06:52:31 KST | INFO |   Train Loss: 0.0282 | Test Loss: 0.2624 | Test Acc: 94.17%
+2026-04-22 06:52:31 KST | INFO |   No improvement (22/30)
+2026-04-22 06:52:31 KST | INFO | 
+2026-04-22 06:52:31 KST | INFO | Epoch 124/200 | LR: 0.032327
+2026-04-22 06:52:38 KST | INFO |   Train Loss: 0.0330 | Test Loss: 0.2555 | Test Acc: 93.67%
+2026-04-22 06:52:38 KST | INFO |   No improvement (23/30)
+2026-04-22 06:52:38 KST | INFO | 
+2026-04-22 06:52:38 KST | INFO | Epoch 125/200 | LR: 0.031594
+2026-04-22 06:52:44 KST | INFO |   Train Loss: 0.0306 | Test Loss: 0.2319 | Test Acc: 93.97%
+2026-04-22 06:52:44 KST | INFO |   No improvement (24/30)
+2026-04-22 06:52:44 KST | INFO | 
+2026-04-22 06:52:44 KST | INFO | Epoch 126/200 | LR: 0.030867
+2026-04-22 06:52:51 KST | INFO |   Train Loss: 0.0273 | Test Loss: 0.2503 | Test Acc: 94.28%
+2026-04-22 06:52:51 KST | INFO |   No improvement (25/30)
+2026-04-22 06:52:51 KST | INFO | 
+2026-04-22 06:52:51 KST | INFO | Epoch 127/200 | LR: 0.030143
+2026-04-22 06:52:58 KST | INFO |   Train Loss: 0.0334 | Test Loss: 0.2409 | Test Acc: 93.85%
+2026-04-22 06:52:58 KST | INFO |   No improvement (26/30)
+2026-04-22 06:52:58 KST | INFO | 
+2026-04-22 06:52:58 KST | INFO | Epoch 128/200 | LR: 0.029425
+2026-04-22 06:53:05 KST | INFO |   Train Loss: 0.0285 | Test Loss: 0.2250 | Test Acc: 94.97%
+2026-04-22 06:53:05 KST | INFO |   🏆 New best accuracy: 94.97%
+2026-04-22 06:53:05 KST | INFO | 
+2026-04-22 06:53:05 KST | INFO | Epoch 129/200 | LR: 0.028712
+2026-04-22 06:53:12 KST | INFO |   Train Loss: 0.0280 | Test Loss: 0.2718 | Test Acc: 93.95%
+2026-04-22 06:53:12 KST | INFO |   No improvement (1/30)
+2026-04-22 06:53:12 KST | INFO | 
+2026-04-22 06:53:12 KST | INFO | Epoch 130/200 | LR: 0.028004
+2026-04-22 06:53:19 KST | INFO |   Train Loss: 0.0248 | Test Loss: 0.2932 | Test Acc: 93.33%
+2026-04-22 06:53:19 KST | INFO |   No improvement (2/30)
+2026-04-22 06:53:19 KST | INFO | 
+2026-04-22 06:53:19 KST | INFO | Epoch 131/200 | LR: 0.027301
+2026-04-22 06:53:25 KST | INFO |   Train Loss: 0.0262 | Test Loss: 0.2625 | Test Acc: 93.85%
+2026-04-22 06:53:25 KST | INFO |   No improvement (3/30)
+2026-04-22 06:53:25 KST | INFO | 
+2026-04-22 06:53:25 KST | INFO | Epoch 132/200 | LR: 0.026604
+2026-04-22 06:53:32 KST | INFO |   Train Loss: 0.0233 | Test Loss: 0.2280 | Test Acc: 94.45%
+2026-04-22 06:53:32 KST | INFO |   No improvement (4/30)
+2026-04-22 06:53:32 KST | INFO | 
+2026-04-22 06:53:32 KST | INFO | Epoch 133/200 | LR: 0.025913
+2026-04-22 06:53:39 KST | INFO |   Train Loss: 0.0228 | Test Loss: 0.2962 | Test Acc: 93.53%
+2026-04-22 06:53:39 KST | INFO |   No improvement (5/30)
+2026-04-22 06:53:39 KST | INFO | 
+2026-04-22 06:53:39 KST | INFO | Epoch 134/200 | LR: 0.025228
+2026-04-22 06:53:45 KST | INFO |   Train Loss: 0.0221 | Test Loss: 0.2460 | Test Acc: 94.17%
+2026-04-22 06:53:45 KST | INFO |   No improvement (6/30)
+2026-04-22 06:53:45 KST | INFO | 
+2026-04-22 06:53:45 KST | INFO | Epoch 135/200 | LR: 0.024549
+2026-04-22 06:53:52 KST | INFO |   Train Loss: 0.0202 | Test Loss: 0.2192 | Test Acc: 94.83%
+2026-04-22 06:53:52 KST | INFO |   No improvement (7/30)
+2026-04-22 06:53:52 KST | INFO | 
+2026-04-22 06:53:52 KST | INFO | Epoch 136/200 | LR: 0.023876
+2026-04-22 06:53:59 KST | INFO |   Train Loss: 0.0205 | Test Loss: 0.2456 | Test Acc: 94.40%
+2026-04-22 06:53:59 KST | INFO |   No improvement (8/30)
+2026-04-22 06:53:59 KST | INFO | 
+2026-04-22 06:53:59 KST | INFO | Epoch 137/200 | LR: 0.023209
+2026-04-22 06:54:05 KST | INFO |   Train Loss: 0.0204 | Test Loss: 0.2776 | Test Acc: 93.88%
+2026-04-22 06:54:05 KST | INFO |   No improvement (9/30)
+2026-04-22 06:54:05 KST | INFO | 
+2026-04-22 06:54:05 KST | INFO | Epoch 138/200 | LR: 0.022550
+2026-04-22 06:54:12 KST | INFO |   Train Loss: 0.0167 | Test Loss: 0.2455 | Test Acc: 94.70%
+2026-04-22 06:54:12 KST | INFO |   No improvement (10/30)
+2026-04-22 06:54:12 KST | INFO | 
+2026-04-22 06:54:12 KST | INFO | Epoch 139/200 | LR: 0.021897
+2026-04-22 06:54:19 KST | INFO |   Train Loss: 0.0154 | Test Loss: 0.2824 | Test Acc: 93.20%
+2026-04-22 06:54:19 KST | INFO |   No improvement (11/30)
+2026-04-22 06:54:19 KST | INFO | 
+2026-04-22 06:54:19 KST | INFO | Epoch 140/200 | LR: 0.021251
+2026-04-22 06:54:26 KST | INFO |   Train Loss: 0.0149 | Test Loss: 0.2890 | Test Acc: 94.12%
+2026-04-22 06:54:26 KST | INFO |   No improvement (12/30)
+2026-04-22 06:54:26 KST | INFO | 
+2026-04-22 06:54:26 KST | INFO | Epoch 141/200 | LR: 0.020612
+2026-04-22 06:54:33 KST | INFO |   Train Loss: 0.0174 | Test Loss: 0.2261 | Test Acc: 94.53%
+2026-04-22 06:54:33 KST | INFO |   No improvement (13/30)
+2026-04-22 06:54:33 KST | INFO | 
+2026-04-22 06:54:33 KST | INFO | Epoch 142/200 | LR: 0.019980
+2026-04-22 06:54:40 KST | INFO |   Train Loss: 0.0164 | Test Loss: 0.2371 | Test Acc: 94.15%
+2026-04-22 06:54:40 KST | INFO |   No improvement (14/30)
+2026-04-22 06:54:40 KST | INFO | 
+2026-04-22 06:54:40 KST | INFO | Epoch 143/200 | LR: 0.019355
+2026-04-22 06:54:46 KST | INFO |   Train Loss: 0.0153 | Test Loss: 0.2386 | Test Acc: 94.55%
+2026-04-22 06:54:46 KST | INFO |   No improvement (15/30)
+2026-04-22 06:54:46 KST | INFO | 
+2026-04-22 06:54:46 KST | INFO | Epoch 144/200 | LR: 0.018739
+2026-04-22 06:54:53 KST | INFO |   Train Loss: 0.0135 | Test Loss: 0.2490 | Test Acc: 94.47%
+2026-04-22 06:54:53 KST | INFO |   No improvement (16/30)
+2026-04-22 06:54:53 KST | INFO | 
+2026-04-22 06:54:53 KST | INFO | Epoch 145/200 | LR: 0.018130
+2026-04-22 06:54:59 KST | INFO |   Train Loss: 0.0123 | Test Loss: 0.2405 | Test Acc: 94.45%
+2026-04-22 06:54:59 KST | INFO |   No improvement (17/30)
+2026-04-22 06:54:59 KST | INFO | 
+2026-04-22 06:54:59 KST | INFO | Epoch 146/200 | LR: 0.017528
+2026-04-22 06:55:06 KST | INFO |   Train Loss: 0.0140 | Test Loss: 0.2288 | Test Acc: 94.62%
+2026-04-22 06:55:06 KST | INFO |   No improvement (18/30)
+2026-04-22 06:55:06 KST | INFO | 
+2026-04-22 06:55:06 KST | INFO | Epoch 147/200 | LR: 0.016935
+2026-04-22 06:55:13 KST | INFO |   Train Loss: 0.0124 | Test Loss: 0.2660 | Test Acc: 93.95%
+2026-04-22 06:55:13 KST | INFO |   No improvement (19/30)
+2026-04-22 06:55:13 KST | INFO | 
+2026-04-22 06:55:13 KST | INFO | Epoch 148/200 | LR: 0.016350
+2026-04-22 06:55:19 KST | INFO |   Train Loss: 0.0111 | Test Loss: 0.2167 | Test Acc: 94.92%
+2026-04-22 06:55:19 KST | INFO |   No improvement (20/30)
+2026-04-22 06:55:19 KST | INFO | 
+2026-04-22 06:55:19 KST | INFO | Epoch 149/200 | LR: 0.015773
+2026-04-22 06:55:26 KST | INFO |   Train Loss: 0.0111 | Test Loss: 0.2164 | Test Acc: 95.12%
+2026-04-22 06:55:26 KST | INFO |   🏆 New best accuracy: 95.12%
+2026-04-22 06:55:26 KST | INFO | 
+2026-04-22 06:55:26 KST | INFO | Epoch 150/200 | LR: 0.015205
+2026-04-22 06:55:33 KST | INFO |   Train Loss: 0.0095 | Test Loss: 0.2094 | Test Acc: 95.20%
+2026-04-22 06:55:33 KST | INFO |   🏆 New best accuracy: 95.20%
+2026-04-22 06:55:33 KST | INFO | 
+2026-04-22 06:55:33 KST | INFO | Epoch 151/200 | LR: 0.014646
+2026-04-22 06:55:39 KST | INFO |   Train Loss: 0.0089 | Test Loss: 0.2384 | Test Acc: 94.72%
+2026-04-22 06:55:39 KST | INFO |   No improvement (1/30)
+2026-04-22 06:55:39 KST | INFO | 
+2026-04-22 06:55:39 KST | INFO | Epoch 152/200 | LR: 0.014095
+2026-04-22 06:55:46 KST | INFO |   Train Loss: 0.0102 | Test Loss: 0.2139 | Test Acc: 95.05%
+2026-04-22 06:55:46 KST | INFO |   No improvement (2/30)
+2026-04-22 06:55:46 KST | INFO | 
+2026-04-22 06:55:46 KST | INFO | Epoch 153/200 | LR: 0.013552
+2026-04-22 06:55:53 KST | INFO |   Train Loss: 0.0082 | Test Loss: 0.2531 | Test Acc: 94.00%
+2026-04-22 06:55:53 KST | INFO |   No improvement (3/30)
+2026-04-22 06:55:53 KST | INFO | 
+2026-04-22 06:55:53 KST | INFO | Epoch 154/200 | LR: 0.013019
+2026-04-22 06:56:00 KST | INFO |   Train Loss: 0.0081 | Test Loss: 0.2566 | Test Acc: 94.53%
+2026-04-22 06:56:00 KST | INFO |   No improvement (4/30)
+2026-04-22 06:56:00 KST | INFO | 
+2026-04-22 06:56:00 KST | INFO | Epoch 155/200 | LR: 0.012495
+2026-04-22 06:56:06 KST | INFO |   Train Loss: 0.0062 | Test Loss: 0.2379 | Test Acc: 95.15%
+2026-04-22 06:56:06 KST | INFO |   No improvement (5/30)
+2026-04-22 06:56:06 KST | INFO | 
+2026-04-22 06:56:06 KST | INFO | Epoch 156/200 | LR: 0.011981
+2026-04-22 06:56:13 KST | INFO |   Train Loss: 0.0052 | Test Loss: 0.2529 | Test Acc: 94.78%
+2026-04-22 06:56:13 KST | INFO |   No improvement (6/30)
+2026-04-22 06:56:13 KST | INFO | 
+2026-04-22 06:56:13 KST | INFO | Epoch 157/200 | LR: 0.011475
+2026-04-22 06:56:20 KST | INFO |   Train Loss: 0.0060 | Test Loss: 0.2366 | Test Acc: 94.83%
+2026-04-22 06:56:20 KST | INFO |   No improvement (7/30)
+2026-04-22 06:56:20 KST | INFO | 
+2026-04-22 06:56:20 KST | INFO | Epoch 158/200 | LR: 0.010979
+2026-04-22 06:56:26 KST | INFO |   Train Loss: 0.0069 | Test Loss: 0.2277 | Test Acc: 94.92%
+2026-04-22 06:56:26 KST | INFO |   No improvement (8/30)
+2026-04-22 06:56:26 KST | INFO | 
+2026-04-22 06:56:26 KST | INFO | Epoch 159/200 | LR: 0.010493
+2026-04-22 06:56:33 KST | INFO |   Train Loss: 0.0061 | Test Loss: 0.2779 | Test Acc: 94.05%
+2026-04-22 06:56:33 KST | INFO |   No improvement (9/30)
+2026-04-22 06:56:33 KST | INFO | 
+2026-04-22 06:56:33 KST | INFO | Epoch 160/200 | LR: 0.010017
+2026-04-22 06:56:40 KST | INFO |   Train Loss: 0.0073 | Test Loss: 0.2483 | Test Acc: 94.35%
+2026-04-22 06:56:40 KST | INFO |   No improvement (10/30)
+2026-04-22 06:56:40 KST | INFO | 
+2026-04-22 06:56:40 KST | INFO | Epoch 161/200 | LR: 0.009550
+2026-04-22 06:56:46 KST | INFO |   Train Loss: 0.0057 | Test Loss: 0.2456 | Test Acc: 94.60%
+2026-04-22 06:56:46 KST | INFO |   No improvement (11/30)
+2026-04-22 06:56:46 KST | INFO | 
+2026-04-22 06:56:46 KST | INFO | Epoch 162/200 | LR: 0.009093
+2026-04-22 06:56:53 KST | INFO |   Train Loss: 0.0056 | Test Loss: 0.2475 | Test Acc: 94.72%
+2026-04-22 06:56:53 KST | INFO |   No improvement (12/30)
+2026-04-22 06:56:53 KST | INFO | 
+2026-04-22 06:56:53 KST | INFO | Epoch 163/200 | LR: 0.008647
+2026-04-22 06:57:00 KST | INFO |   Train Loss: 0.0048 | Test Loss: 0.2425 | Test Acc: 94.70%
+2026-04-22 06:57:00 KST | INFO |   No improvement (13/30)
+2026-04-22 06:57:00 KST | INFO | 
+2026-04-22 06:57:00 KST | INFO | Epoch 164/200 | LR: 0.008211
+2026-04-22 06:57:07 KST | INFO |   Train Loss: 0.0045 | Test Loss: 0.2270 | Test Acc: 95.03%
+2026-04-22 06:57:07 KST | INFO |   No improvement (14/30)
+2026-04-22 06:57:07 KST | INFO | 
+2026-04-22 06:57:07 KST | INFO | Epoch 165/200 | LR: 0.007785
+2026-04-22 06:57:14 KST | INFO |   Train Loss: 0.0037 | Test Loss: 0.2400 | Test Acc: 94.55%
+2026-04-22 06:57:14 KST | INFO |   No improvement (15/30)
+2026-04-22 06:57:14 KST | INFO | 
+2026-04-22 06:57:14 KST | INFO | Epoch 166/200 | LR: 0.007369
+2026-04-22 06:57:20 KST | INFO |   Train Loss: 0.0034 | Test Loss: 0.2394 | Test Acc: 95.05%
+2026-04-22 06:57:20 KST | INFO |   No improvement (16/30)
+2026-04-22 06:57:20 KST | INFO | 
+2026-04-22 06:57:20 KST | INFO | Epoch 167/200 | LR: 0.006964
+2026-04-22 06:57:27 KST | INFO |   Train Loss: 0.0034 | Test Loss: 0.2526 | Test Acc: 94.53%
+2026-04-22 06:57:27 KST | INFO |   No improvement (17/30)
+2026-04-22 06:57:27 KST | INFO | 
+2026-04-22 06:57:27 KST | INFO | Epoch 168/200 | LR: 0.006569
+2026-04-22 06:57:34 KST | INFO |   Train Loss: 0.0036 | Test Loss: 0.2456 | Test Acc: 95.08%
+2026-04-22 06:57:34 KST | INFO |   No improvement (18/30)
+2026-04-22 06:57:34 KST | INFO | 
+2026-04-22 06:57:34 KST | INFO | Epoch 169/200 | LR: 0.006186
+2026-04-22 06:57:40 KST | INFO |   Train Loss: 0.0039 | Test Loss: 0.2334 | Test Acc: 94.88%
+2026-04-22 06:57:40 KST | INFO |   No improvement (19/30)
+2026-04-22 06:57:40 KST | INFO | 
+2026-04-22 06:57:40 KST | INFO | Epoch 170/200 | LR: 0.005813
+2026-04-22 06:57:47 KST | INFO |   Train Loss: 0.0031 | Test Loss: 0.2345 | Test Acc: 95.10%
+2026-04-22 06:57:47 KST | INFO |   No improvement (20/30)
+2026-04-22 06:57:47 KST | INFO | 
+2026-04-22 06:57:47 KST | INFO | Epoch 171/200 | LR: 0.005451
+2026-04-22 06:57:54 KST | INFO |   Train Loss: 0.0031 | Test Loss: 0.2373 | Test Acc: 94.90%
+2026-04-22 06:57:54 KST | INFO |   No improvement (21/30)
+2026-04-22 06:57:54 KST | INFO | 
+2026-04-22 06:57:54 KST | INFO | Epoch 172/200 | LR: 0.005100
+2026-04-22 06:58:01 KST | INFO |   Train Loss: 0.0030 | Test Loss: 0.2362 | Test Acc: 95.00%
+2026-04-22 06:58:01 KST | INFO |   No improvement (22/30)
+2026-04-22 06:58:01 KST | INFO | 
+2026-04-22 06:58:01 KST | INFO | Epoch 173/200 | LR: 0.004760
+2026-04-22 06:58:07 KST | INFO |   Train Loss: 0.0031 | Test Loss: 0.2388 | Test Acc: 94.78%
+2026-04-22 06:58:07 KST | INFO |   No improvement (23/30)
+2026-04-22 06:58:07 KST | INFO | 
+2026-04-22 06:58:07 KST | INFO | Epoch 174/200 | LR: 0.004431
+2026-04-22 06:58:14 KST | INFO |   Train Loss: 0.0027 | Test Loss: 0.2351 | Test Acc: 95.10%
+2026-04-22 06:58:14 KST | INFO |   No improvement (24/30)
+2026-04-22 06:58:14 KST | INFO | 
+2026-04-22 06:58:14 KST | INFO | Epoch 175/200 | LR: 0.004113
+2026-04-22 06:58:21 KST | INFO |   Train Loss: 0.0030 | Test Loss: 0.2282 | Test Acc: 95.08%
+2026-04-22 06:58:21 KST | INFO |   No improvement (25/30)
+2026-04-22 06:58:21 KST | INFO | 
+2026-04-22 06:58:21 KST | INFO | Epoch 176/200 | LR: 0.003807
+2026-04-22 06:58:27 KST | INFO |   Train Loss: 0.0033 | Test Loss: 0.2286 | Test Acc: 95.15%
+2026-04-22 06:58:27 KST | INFO |   No improvement (26/30)
+2026-04-22 06:58:27 KST | INFO | 
+2026-04-22 06:58:27 KST | INFO | Epoch 177/200 | LR: 0.003512
+2026-04-22 06:58:34 KST | INFO |   Train Loss: 0.0033 | Test Loss: 0.2283 | Test Acc: 95.15%
+2026-04-22 06:58:34 KST | INFO |   No improvement (27/30)
+2026-04-22 06:58:34 KST | INFO | 
+2026-04-22 06:58:34 KST | INFO | Epoch 178/200 | LR: 0.003229
+2026-04-22 06:58:41 KST | INFO |   Train Loss: 0.0022 | Test Loss: 0.2387 | Test Acc: 95.15%
+2026-04-22 06:58:41 KST | INFO |   No improvement (28/30)
+2026-04-22 06:58:41 KST | INFO | 
+2026-04-22 06:58:41 KST | INFO | Epoch 179/200 | LR: 0.002957
+2026-04-22 06:58:48 KST | INFO |   Train Loss: 0.0028 | Test Loss: 0.2322 | Test Acc: 95.00%
+2026-04-22 06:58:48 KST | INFO |   No improvement (29/30)
+2026-04-22 06:58:48 KST | INFO | 
+2026-04-22 06:58:48 KST | INFO | Epoch 180/200 | LR: 0.002697
+2026-04-22 06:58:54 KST | INFO |   Train Loss: 0.0026 | Test Loss: 0.2430 | Test Acc: 94.95%
+2026-04-22 06:58:54 KST | INFO |   No improvement (30/30)
+2026-04-22 06:58:54 KST | INFO | 
+2026-04-22 06:58:54 KST | INFO | Early stopping after 30 epochs without improvement
+2026-04-22 06:58:54 KST | INFO | 
+2026-04-22 06:58:54 KST | INFO | ================================================================================
+2026-04-22 06:58:54 KST | INFO | TRAINING COMPLETE
+2026-04-22 06:58:54 KST | INFO | ================================================================================
+2026-04-22 06:58:54 KST | INFO | Best accuracy:  95.20% (Epoch 150)
+2026-04-22 06:58:54 KST | INFO | Final accuracy: 94.95%
+2026-04-22 06:58:54 KST | INFO | ================================================================================
+2026-04-22 06:58:54 KST | INFO | 
+2026-04-22 06:58:54 KST | INFO | Full log: logs/centralized_20260422_063817.log
+2026-04-22 06:58:54 KST | INFO | ================================================================================
