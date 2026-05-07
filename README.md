@@ -438,4 +438,8 @@ python centralized.py --help
 
 ## 📝 License
 
-This project is licensed under the MIT License.
+Copyright © 2026 Neouly. All rights reserved.
+
+This software is proprietary and licensed under the terms in the LICENSE file.
+Commercial use, copying, modification, redistribution, or sublicensing is not permitted
+except under a written agreement with Neouly.
