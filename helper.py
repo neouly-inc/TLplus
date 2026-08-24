@@ -147,10 +147,10 @@ class HelperNode:
         self.config = config
         
         # Network configuration
-        self.node_host = config.get('node_host', '127.0.0.1')
-        self.node_port = config.get('node_port', 8081)
-        self.orch_host = config.get('orch_host', '127.0.0.1')
-        self.orch_port = config.get('orch_port', 8082)
+        self.node_host = config.get('node_host', DEFAULT_HOST)
+        self.node_port = config.get('node_port', DEFAULT_NODE_PORT)
+        self.orch_host = config.get('orch_host', DEFAULT_HOST)
+        self.orch_port = config.get('orch_port', DEFAULT_ORCH_PORT)
         
         # Computation (helper uses CPU to save GPU resources for nodes)
         self.model = None

@@ -116,15 +116,15 @@ class SecureNode:
         """Initialize communication layer based on mode."""
         if self.secure_mode:
             self.comm = SecureNodeCommunicator(
-                orch_host=self.config.get('orch_host', '127.0.0.1'),
-                orch_port=self.config.get('orch_port', 8080),
-                helper_host=self.config.get('helper_host', '127.0.0.1'),
-                helper_port=self.config.get('helper_port', 8081)
+                orch_host=self.config.get('orch_host', DEFAULT_HOST),
+                orch_port=self.config.get('orch_port', DEFAULT_PORT),
+                helper_host=self.config.get('helper_host', DEFAULT_HOST),
+                helper_port=self.config.get('helper_port', DEFAULT_HELPER_PORT)
             )
         else:
             self.comm = NodeCommunicator(
-                host=self.config.get('host', '127.0.0.1'),
-                port=self.config.get('port', 8080)
+                host=self.config.get('host', DEFAULT_HOST),
+                port=self.config.get('port', DEFAULT_PORT)
             )
     
     # ==========================================================================
