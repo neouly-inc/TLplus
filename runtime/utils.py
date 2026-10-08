@@ -118,29 +118,35 @@ class BatchScheduler:
 
 class GradientAggregator:
     """Aggregates gradients from distributed nodes.
-    
+
     In distributed training, each node computes gradients on its data subset.
-    This class combines these gradients using averaging, which is mathematically
-    equivalent to computing gradients on the full batch.
-    
-    Note: Works for both standard and secure modes. In secure mode, we average
-    secret shares (preserves linear homomorphic property).
+    The loss is averaged over the merged batch at the orchestrator, so the
+    cut-layer gradients sent to each node already carry the 1/B factor. Each
+    node's parameter gradient is therefore its share of the full-batch
+    gradient, and summing the shares is mathematically equivalent to computing
+    gradients on the full batch.
+
+    Note: Works for both standard and secure modes. Summation is linear, so it
+    also preserves the additive secret sharing property.
     """
-    
+
     @staticmethod
     def aggregate_gradients(gradient_dicts: List[Dict[str, torch.Tensor]],
                            param_names: List[str],
                            valid_nodes: List[bool]) -> Dict[str, torch.Tensor]:
-        """Aggregate gradients using averaging.
-        
+        """Aggregate gradients using summation.
+
         Mathematical property:
-            avg(grad_1, grad_2, ..., grad_n) = grad(full_batch)
-        
+            sum(grad_1, grad_2, ..., grad_n) = grad(full_batch)
+
+        Averaging instead would scale node-side gradients by 1/n and slow
+        learning of the layers before the cut point.
+
         For secure mode:
-            avg(share1_A, share1_B, ...) + avg(share2_A, share2_B, ...) 
-            = avg(share1_A + share2_A, share1_B + share2_B, ...)
-            = avg(actual_A, actual_B, ...)
-        
+            sum(share1_A, share1_B, ...) + sum(share2_A, share2_B, ...)
+            = sum(share1_A + share2_A, share1_B + share2_B, ...)
+            = sum(actual_A, actual_B, ...)
+
         Args:
             gradient_dicts: Gradient dictionaries from each node
             param_names: Parameters to aggregate
@@ -170,11 +176,11 @@ class GradientAggregator:
                 if name in grads:
                     collections[name].append(grads[name])
         
-        # Compute averages
+        # Compute sums
         aggregated = {}
         for name in param_names:
             if collections[name]:
-                aggregated[name] = torch.stack(collections[name]).mean(dim=0)
+                aggregated[name] = torch.stack(collections[name]).sum(dim=0)
         
         return aggregated
 
