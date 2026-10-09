@@ -7,6 +7,7 @@ import torch
 from datetime import datetime, timezone, timedelta
 
 from runtime.protocol import SecureSocketCommunicator, SecureMessageType, SecretSharing
+from runtime.utils import DataMerger, GradientAggregator
 from core.models import create_orchestrator_model
 
 
@@ -134,8 +135,9 @@ class HelperNode:
     
     Privacy Properties:
     ✓ Intermediate activations: Never reconstructed
-    ✓ Cut-layer gradients: Computed on shares separately
+    ✓ Cut-layer gradients: Computed on shares separately, sent directly to nodes
     ✓ Output shares: Sent to orchestrator (reconstructed there only)
+    ✓ Parameter gradient shares: Summed across nodes before sending to orchestrator
     """
     
     def __init__(self, config: dict):
@@ -165,6 +167,8 @@ class HelperNode:
         self.merged_share_1 = None
         self.merged_share_1_input = None
         self.outputs_share_1 = None
+        self.split_sizes = []
+        self.valid_nodes = []
         self.batch_count = 0
         
         logging.info(f"Helper server initialized")
@@ -290,19 +294,12 @@ class HelperNode:
                 return self._phase_compute_forward(comm)
             
             # ==================================================================
-            # PHASE 3: COMPUTE BACKWARD ON SHARE_1
+            # PHASE 3: COMPUTE BACKWARD ON SHARE_1 AND DISTRIBUTE TO NODES
             # ==================================================================
-            
+
             elif phase == 'compute' and coord_msg.get('action') == 'backward':
                 return self._phase_compute_backward(comm, coord_msg)
-            
-            # ==================================================================
-            # PHASE 4: DISTRIBUTE GRADIENT SHARES TO NODES
-            # ==================================================================
-            
-            elif phase == 'backward':
-                return self._phase_backward(comm, coord_msg)
-            
+
             else:
                 logging.warning(f"Unknown phase: {phase}")
                 return True
@@ -324,7 +321,7 @@ class HelperNode:
         2. Update local model
         3. Collect share_1 from all nodes
         4. Merge shares across nodes
-        5. Send confirmation to orchestrator
+        5. Send confirmation to orchestrator (without the shares)
         
         Args:
             comm: Communication helper
@@ -356,23 +353,28 @@ class HelperNode:
             share_data = handler.receive_forward_share()
             forward_shares.append(share_data)
         
-        # Merge shares
+        # Merge shares, remembering each node's size for the backward split
         share_list = []
+        self.split_sizes = []
+        self.valid_nodes = []
         for result in forward_shares:
             if result.get('activations') is not None:
                 share_list.append(result['activations'])
-        
+                self.split_sizes.append(result['activations'].shape[0])
+                self.valid_nodes.append(True)
+            else:
+                self.valid_nodes.append(False)
+
         if not share_list:
             # Empty batch
             comm._send_message(self.orch_socket, SecureMessageType.SHUTDOWN, {})
             return True
-        
+
         # Merge helper's shares (share_1)
         self.merged_share_1 = torch.cat(share_list, dim=0).to(self.device)
-        
-        # Send confirmation to orchestrator
+
+        # Send confirmation to orchestrator (shares stay with the helper)
         comm._send_message(self.orch_socket, SecureMessageType.HELPER_READY, {
-            'forward_shares': forward_shares,
             'status': 'forward_collected'
         })
         
@@ -405,14 +407,16 @@ class HelperNode:
         return True
     
     def _phase_compute_backward(self, comm, coord_msg) -> bool:
-        """Phase 3: Compute backward pass on share_1.
-        
+        """Phase 3: Compute backward pass on share_1 and distribute to nodes.
+
         Steps:
         1. Receive loss gradient from orchestrator
         2. Backpropagate through share_1 computation
         3. Extract gradient at cut point
-        4. Send gradient share to orchestrator
-        
+        4. Send each node its cut-gradient share directly
+        5. Collect parameter gradient shares from nodes
+        6. Send their sum across nodes to orchestrator
+
         Args:
             comm: Communication helper
             coord_msg: Coordination message with output gradient
@@ -435,46 +439,32 @@ class HelperNode:
             
             # Extract gradient at cut point
             cut_grad_share_1 = self.merged_share_1_input.grad
-        
-        # Send gradient share to orchestrator
-        comm._send_message(self.orch_socket, SecureMessageType.HELPER_READY, {
-            'cut_gradient': cut_grad_share_1.detach().cpu() if cut_grad_share_1 is not None else None,
-            'status': 'backward_computed'
-        })
-        
-        return True
-    
-    def _phase_backward(self, comm, coord_msg) -> bool:
-        """Phase 4: Distribute gradient shares to nodes.
-        
-        Steps:
-        1. Receive gradient shares from orchestrator
-        2. Send shares to nodes
-        3. Collect parameter gradient shares from nodes
-        4. Forward to orchestrator
-        
-        Args:
-            comm: Communication helper
-            coord_msg: Coordination message with gradient shares
-            
-        Returns:
-            True to continue
-        """
-        gradient_shares = coord_msg.get('gradient_shares', [])
-        
-        # Send gradient shares (share_1) to nodes
+
+        # Send cut-gradient shares (share_1) directly to nodes
+        if cut_grad_share_1 is not None:
+            gradient_shares = DataMerger.split_gradients(
+                cut_grad_share_1, self.split_sizes, self.valid_nodes
+            )
+        else:
+            gradient_shares = [None] * len(self.node_handlers)
+
         for handler, grad_share in zip(self.node_handlers, gradient_shares):
             handler.send_backward_share(grad_share)
-        
+
         # Collect parameter gradient shares from nodes
         node_grad_shares = []
         for handler in self.node_handlers:
             grad_share = handler.receive_gradient_share()
             node_grad_shares.append(grad_share)
-        
-        # Send parameter gradient shares to orchestrator
+
+        # Sum shares across nodes so the orchestrator only sees the aggregate
+        aggregated_share = GradientAggregator.aggregate_gradients(
+            node_grad_shares, self.model.get_node_param_names(), self.valid_nodes
+        )
+
+        # Send aggregated parameter gradient share to orchestrator
         comm._send_message(self.orch_socket, SecureMessageType.HELPER_READY, {
-            'gradient_shares': node_grad_shares,
+            'gradient_share': aggregated_share,
             'status': 'backward_complete'
         })
         

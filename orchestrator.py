@@ -154,7 +154,7 @@ class SecureTrainingPhases:
         forward_results_orch = self.orch.comm.collect_forward_results()
         
         # Wait for helper to collect share_1
-        msg_type, helper_forward = self.comm_helper._receive_message(
+        msg_type, _ = self.comm_helper._receive_message(
             self.orch.comm.helper_socket
         )
         if msg_type == SecureMessageType.SHUTDOWN:
@@ -222,7 +222,9 @@ class SecureTrainingPhases:
             merged_labels: Ground truth labels
             
         Returns:
-            Reconstructed cut gradient or None on error
+            Tuple of (cut_grad_share_0, loss) or (None, None) on error.
+            The helper sends its cut-gradient share directly to the nodes,
+            so the full cut gradient is never reconstructed here.
         """
         # Reconstruct outputs for loss computation
         # CRITICAL: Detach both shares to create clean computational graph
@@ -251,7 +253,9 @@ class SecureTrainingPhases:
             )
             return None, None
         
-        # Signal helper to compute backward on share_1
+        # Signal helper to compute backward on share_1. The helper sends its
+        # cut-gradient share directly to the nodes, then returns the sum of
+        # the nodes' parameter gradient shares (received in phase 4).
         self.comm_helper._send_message(
             self.orch.comm.helper_socket,
             SecureMessageType.HELPER_INIT,
@@ -261,130 +265,81 @@ class SecureTrainingPhases:
                 'output_gradient': output_gradient.detach().cpu()
             }
         )
-        
-        # Receive helper's cut gradient
-        msg_type, helper_grad = self.comm_helper._receive_message(
-            self.orch.comm.helper_socket
-        )
-        if msg_type != SecureMessageType.HELPER_READY:
-            return None, loss.item()
-        
-        cut_grad_share_1 = helper_grad['cut_gradient'].to(self.orch.device)
-        
-        # Reconstruct true gradient at cut point
-        cut_gradient_reconstructed = cut_grad_share_0 + cut_grad_share_1
-        
-        return cut_gradient_reconstructed, loss.item()
-    
+
+        return cut_grad_share_0, loss.item()
+
     def phase4_distribute_gradients(
         self,
-        cut_gradient: torch.Tensor,
+        cut_grad_share_0: torch.Tensor,
         split_sizes: List[int],
         valid_nodes: List[bool]
-    ) -> Optional[float]:
-        """Phase 4: Distribute gradient shares and collect parameter updates.
-        
+    ) -> Optional[bool]:
+        """Phase 4: Send cut-gradient shares and apply aggregated parameter updates.
+
+        Nodes reconstruct the cut gradient locally from the orchestrator's and
+        the helper's shares. Parameter gradient shares are summed across nodes
+        on each side before reconstruction, so only the aggregate is revealed.
+
         Args:
-            cut_gradient: Reconstructed gradient at cut point
+            cut_grad_share_0: Orchestrator's share of the gradient at cut point
             split_sizes: Size of each node's contribution
             valid_nodes: Which nodes have valid data
-            
+
         Returns:
-            Loss value or None on error
+            True on success or None on error
         """
-        # Re-share the gradient for distribution to nodes
-        cut_gradient_share_0_new, cut_gradient_share_1_new = SecretSharing.share_tensor(
-            cut_gradient,
-            SecretSharing._gradient_noise_scale
+        # Send orchestrator's cut-gradient share to nodes
+        gradient_shares_orch = DataMerger.split_gradients(
+            cut_grad_share_0, split_sizes, valid_nodes
         )
-        
-        # Split shares by node
-        grad_splits_0 = torch.split(cut_gradient_share_0_new, split_sizes, dim=0)
-        grad_splits_1 = torch.split(cut_gradient_share_1_new, split_sizes, dim=0)
-        
-        gradient_shares_orch = []
-        gradient_shares_helper = []
-        
-        grad_idx = 0
-        for is_valid in valid_nodes:
-            if is_valid:
-                gradient_shares_orch.append(grad_splits_0[grad_idx].detach().cpu())
-                gradient_shares_helper.append(grad_splits_1[grad_idx].detach().cpu())
-                grad_idx += 1
-            else:
-                gradient_shares_orch.append(None)
-                gradient_shares_helper.append(None)
-        
-        # Send share_0 to nodes
         self.orch.comm.broadcast_backward_signal(gradient_shares_orch)
-        
-        # Send share_1 to helper for distribution
-        self.comm_helper._send_message(
-            self.orch.comm.helper_socket,
-            SecureMessageType.HELPER_INIT,
-            {'phase': 'backward', 'gradient_shares': gradient_shares_helper}
-        )
-        
+
         # Collect parameter gradient shares from nodes
         gradient_share_results_orch = self.orch.comm.collect_gradient_results()
-        
-        # Receive parameter gradient shares from helper
+
+        # Receive helper's parameter gradient shares, summed across nodes
         msg_type, helper_param_grads = self.comm_helper._receive_message(
             self.orch.comm.helper_socket
         )
-        if msg_type == SecureMessageType.SHUTDOWN:
+        if msg_type != SecureMessageType.HELPER_READY:
             return None
-        
-        gradient_share_results_helper = helper_param_grads.get('gradient_shares', [])
-        
+
+        aggregated_share_helper = helper_param_grads.get('gradient_share', {})
+
         # Reconstruct and apply parameter gradients
         self._apply_reconstructed_gradients(
             gradient_share_results_orch,
-            gradient_share_results_helper,
+            aggregated_share_helper,
             valid_nodes
         )
-        
+
         return True
-    
+
     def _apply_reconstructed_gradients(
         self,
         grad_shares_orch: List[Dict],
-        grad_shares_helper: List[Dict],
+        aggregated_share_helper: Dict[str, torch.Tensor],
         valid_nodes: List[bool]
     ) -> None:
-        """Reconstruct and apply parameter gradients to model.
-        
+        """Reconstruct the aggregated parameter gradients and apply them.
+
         Args:
-            grad_shares_orch: Gradient shares from orchestrator path
-            grad_shares_helper: Gradient shares from helper path
+            grad_shares_orch: Per-node gradient shares from orchestrator path
+            aggregated_share_helper: Helper's gradient shares, summed across nodes
             valid_nodes: Which nodes have valid data
         """
         node_param_names = self.orch.model.get_node_param_names()
-        reconstructed_gradients = []
-        
-        for grad_orch, grad_helper, is_valid in zip(
-            grad_shares_orch,
-            grad_shares_helper,
-            valid_nodes
-        ):
-            if not is_valid or not grad_orch or not grad_helper:
-                reconstructed_gradients.append({})
-                continue
-            
-            recon_grads = {}
-            for name in node_param_names:
-                if name in grad_orch and name in grad_helper:
-                    recon_grads[name] = SecretSharing.reconstruct_tensor(
-                        grad_orch[name], grad_helper[name]
-                    )
-            
-            reconstructed_gradients.append(recon_grads)
-        
-        # Aggregate gradients
-        aggregated_grads = GradientAggregator.aggregate_gradients(
-            reconstructed_gradients, node_param_names, valid_nodes
+
+        # Sum orchestrator's shares across nodes, then reconstruct the aggregate
+        aggregated_share_orch = GradientAggregator.aggregate_gradients(
+            grad_shares_orch, node_param_names, valid_nodes
         )
-        
+        aggregated_grads = {
+            name: SecretSharing.reconstruct_tensor(share_0, aggregated_share_helper[name])
+            for name, share_0 in aggregated_share_orch.items()
+            if name in aggregated_share_helper
+        }
+
         # Apply gradients to model
         for name, param in self.orch.model.named_parameters():
             if name in aggregated_grads:
@@ -912,11 +867,11 @@ class SecureOrchestrator:
             self.secure_phases._send_empty_signals(len(valid_nodes))
             return None
         
-        cut_gradient_reconstructed, loss_value = result
-        
+        cut_grad_share_0, loss_value = result
+
         # Phase 4: Distribute gradients and update parameters
         success = self.secure_phases.phase4_distribute_gradients(
-            cut_gradient_reconstructed, split_sizes, valid_nodes
+            cut_grad_share_0, split_sizes, valid_nodes
         )
         if not success:
             return None
