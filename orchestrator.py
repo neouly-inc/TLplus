@@ -255,7 +255,8 @@ class SecureTrainingPhases:
         
         # Signal helper to compute backward on share_1. The helper sends its
         # cut-gradient share directly to the nodes, then returns the sum of
-        # the nodes' parameter gradient shares (received in phase 4).
+        # the nodes' parameter gradient shares and its own server-side
+        # parameter gradients (received in phase 4).
         self.comm_helper._send_message(
             self.orch.comm.helper_socket,
             SecureMessageType.HELPER_INIT,
@@ -279,6 +280,7 @@ class SecureTrainingPhases:
         Nodes reconstruct the cut gradient locally from the orchestrator's and
         the helper's shares. Parameter gradient shares are summed across nodes
         on each side before reconstruction, so only the aggregate is revealed.
+        Server-side parameter gradients from the helper are summed with the orchestrator's.
 
         Args:
             cut_grad_share_0: Orchestrator's share of the gradient at cut point
@@ -297,7 +299,8 @@ class SecureTrainingPhases:
         # Collect parameter gradient shares from nodes
         gradient_share_results_orch = self.orch.comm.collect_gradient_results()
 
-        # Receive helper's parameter gradient shares, summed across nodes
+        # Receive helper's parameter gradient shares, summed across nodes,
+        # and its server-side parameter gradients
         msg_type, helper_param_grads = self.comm_helper._receive_message(
             self.orch.comm.helper_socket
         )
@@ -305,11 +308,13 @@ class SecureTrainingPhases:
             return None
 
         aggregated_share_helper = helper_param_grads.get('gradient_share', {})
+        helper_gradients = helper_param_grads.get('helper_gradients', {})
 
         # Reconstruct and apply parameter gradients
         self._apply_reconstructed_gradients(
             gradient_share_results_orch,
             aggregated_share_helper,
+            helper_gradients,
             valid_nodes
         )
 
@@ -319,6 +324,7 @@ class SecureTrainingPhases:
         self,
         grad_shares_orch: List[Dict],
         aggregated_share_helper: Dict[str, torch.Tensor],
+        helper_gradients: Dict[str, torch.Tensor],
         valid_nodes: List[bool]
     ) -> None:
         """Reconstruct the aggregated parameter gradients and apply them.
@@ -326,6 +332,7 @@ class SecureTrainingPhases:
         Args:
             grad_shares_orch: Per-node gradient shares from orchestrator path
             aggregated_share_helper: Helper's gradient shares, summed across nodes
+            helper_gradients: Server-side parameter gradients computed on helper share_1
             valid_nodes: Which nodes have valid data
         """
         node_param_names = self.orch.model.get_node_param_names()
@@ -339,6 +346,9 @@ class SecureTrainingPhases:
             for name, share_0 in aggregated_share_orch.items()
             if name in aggregated_share_helper
         }
+
+        # Helper's server-side parameter gradients are summed with the orchestrator's
+        aggregated_grads.update(helper_gradients)
 
         # Apply gradients to model
         for name, param in self.orch.model.named_parameters():

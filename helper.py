@@ -415,7 +415,7 @@ class HelperNode:
         3. Extract gradient at cut point
         4. Send each node its cut-gradient share directly
         5. Collect parameter gradient shares from nodes
-        6. Send their sum across nodes to orchestrator
+        6. Send their sum across nodes and server-side parameter gradients to orchestrator
 
         Args:
             comm: Communication helper
@@ -429,16 +429,25 @@ class HelperNode:
         
         if output_gradient is None or self.outputs_share_1 is None or self.merged_share_1_input is None:
             cut_grad_share_1 = None
+            helper_gradients = {}
         else:
             # Move gradient to device
             output_gradient = output_gradient.to(self.device)
-            
+
+            self.model.zero_grad()
             # Backpropagate using the actual loss gradient
             # This is dL/d(outputs) where outputs = outputs_share_0 + outputs_share_1
             self.outputs_share_1.backward(output_gradient)
             
             # Extract gradient at cut point
             cut_grad_share_1 = self.merged_share_1_input.grad
+
+            # Collect parameter gradients computed on share_1
+            helper_gradients = {
+                name: param.grad.detach().cpu()
+                for name, param in self.model.named_parameters()
+                if param.grad is not None
+            }
 
         # Send cut-gradient shares (share_1) directly to nodes
         if cut_grad_share_1 is not None:
@@ -462,9 +471,12 @@ class HelperNode:
             node_grad_shares, self.model.get_node_param_names(), self.valid_nodes
         )
 
-        # Send aggregated parameter gradient share to orchestrator
+        # Send gradients to orchestrator:
+        # - gradient_share: node-side aggregated parameter gradient share
+        # - helper_gradients: server-side parameter gradients computed on helper share_1
         comm._send_message(self.orch_socket, SecureMessageType.HELPER_READY, {
             'gradient_share': aggregated_share,
+            'helper_gradients': helper_gradients,
             'status': 'backward_complete'
         })
         
