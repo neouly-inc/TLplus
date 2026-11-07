@@ -453,14 +453,16 @@ class ModelEvaluator:
                 
                 outputs = model.forward_full(inputs)
                 loss = self.criterion(outputs, labels)
-                total_loss += loss.item()
+                # Assumes reduction='mean'; scale back to the batch sum.
+                # TODO: handle criterion.reduction ('sum'/'none') generically
+                total_loss += loss.item() * labels.size(0)
                 
                 _, predicted = torch.max(outputs, 1)
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
                 all_predictions.extend(predicted.cpu().tolist())
         
-        avg_loss = total_loss / len(dataloader)
+        avg_loss = total_loss / total
         accuracy = 100.0 * correct / total
         unique_preds = len(set(all_predictions))
         
@@ -512,14 +514,16 @@ class SecureEvaluator:
                 
                 outputs = model.forward_full(inputs)
                 loss = criterion(outputs, labels)
-                total_loss += loss.item()
+                # Assumes reduction='mean'; scale back to the batch sum.
+                # TODO: handle criterion.reduction ('sum'/'none') generically
+                total_loss += loss.item() * labels.size(0)
                 
                 _, predicted = torch.max(outputs, 1)
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
                 all_predictions.extend(predicted.cpu().tolist())
         
-        avg_loss = total_loss / len(dataloader)
+        avg_loss = total_loss / total
         accuracy = 100.0 * correct / total
         unique_preds = len(set(all_predictions))
         
