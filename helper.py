@@ -149,8 +149,8 @@ class HelperNode:
         self.config = config
         
         # Network configuration
-        self.node_host = config.get('node_host', DEFAULT_HOST)
-        self.node_port = config.get('node_port', DEFAULT_NODE_PORT)
+        self.node_host = config.get('host', DEFAULT_HOST)
+        self.node_port = config.get('port', DEFAULT_NODE_PORT)
         self.orch_host = config.get('orch_host', DEFAULT_HOST)
         self.orch_port = config.get('orch_port', DEFAULT_ORCH_PORT)
         
